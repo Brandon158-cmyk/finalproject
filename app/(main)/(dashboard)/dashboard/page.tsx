@@ -29,7 +29,7 @@ const Dashboard = async () => {
         </h1>
         <p className="text-muted-foreground text-sm sm:text-base">
           {coursesInProgress.length === 0
-            ? "There is no progression on your dashboard at the moment. Click Courses in the sidebar to browse and enroll in courses to get started. "
+            ? "Click Courses in the sidebar to browse and enroll in courses to get started."
             : `Welcome back ${user.firstName}! Track your learning progress below and catch up on your courses.`}
         </p>
       </div>

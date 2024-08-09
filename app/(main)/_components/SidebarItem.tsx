@@ -23,9 +23,9 @@ const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
       variant={"ghost"}
       size={"lg"}
       className={cn(
-        "flex items-center justify-start gap-x-3 px-4 py-[26px] text-muted-foreground text-sm mx-3 !rounded-xl overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
+        "bg-white/10 flex items-center justify-start gap-x-3 px-4 py-[26px] text-white text-sm mx-3 !rounded-sm overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
         isActive
-          ? "text-primary opacity-100 hover:bg-primary/10 hover:text-primary"
+          ? "bg-[#11DD7B] text-primary opacity-100 hover:bg-white hover:text-primary"
           : ""
       )}
     >
@@ -34,8 +34,8 @@ const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
           className={cn(
             "p-[6px] rounded-[6px] transition-all duration-300",
             isActive
-              ? "bg-primary/25 group-hover:bg-primary/5 text-primary"
-              : "bg-accent text-muted-foreground group-hover:text-foreground"
+              ? "bg-white group-hover:bg-primary/5 text-primary"
+              : "bg-white text-primary group-hover:text-foreground"
           )}
         >
           <Icon className="w-5 h-5" />
