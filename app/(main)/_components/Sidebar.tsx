@@ -32,7 +32,7 @@ const Sidebar = () => {
           variant={"ghost"}
           size={"lg"}
           className={cn(
-            "bg-[#11DD7B]/25 flex items-center justify-start w-full gap-x-3 px-4 py-[26px] text-white text-sm mx-3 !rounded-sm overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
+            "bg-white/10 flex items-center justify-start w-full gap-x-3 px-4 py-[26px] text-white text-sm mx-3 !rounded-sm overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
             isActive
               ? "bg-[#11DD7B] text-primary opacity-100 hover:bg-white hover:text-primary"
               : ""

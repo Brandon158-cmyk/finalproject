@@ -33,7 +33,7 @@ const Dashboard = async () => {
             : `Welcome back ${user.firstName}! Track your learning progress below and catch up on your courses.`}
         </p>
       </div>
-      <div className="bg-secondary border rounded-3xl overflow-hidden">
+      <div className="bg-white border rounded-sm overflow-hidden">
         <UserCard />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">
           <InfoCard
@@ -56,7 +56,7 @@ const Dashboard = async () => {
           />
         </div>
       </div>
-      <div className="bg-secondary border rounded-3xl overflow-hidden p-5">
+      <div className="bg-secondary border rounded-sm overflow-hidden p-5">
         <CoursesList items={[...coursesInProgress, ...completedCourses]} />
       </div>
     </div>

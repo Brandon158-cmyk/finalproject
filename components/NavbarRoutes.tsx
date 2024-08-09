@@ -24,11 +24,11 @@ const NavbarRoutes = async () => {
     <div className="flex gap-x-2 ml-auto items-center justify-end w-full">
       <NavbarRoutesClient />
       <div className="flex items-center justify-center bg-secondary rounded-sm py-2 px-2 pl-4">
-        <div className="flex items-center gap-1 pr-2 text-lg">
-          <Star className="text-[#11DD7B] w-4 h-4 fill-primary" />
+        <div className="flex items-center gap-1 pr-2 text-sm">
+          <Star className="text-[#11DD7B] w-4 h-4 fill-[#11DD7B]" />
           {xp}
         </div>
-        <div className="border-l border-primary flex items-center gap-2 pl-5">
+        <div className="flex items-center gap-2 pl-2">
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>

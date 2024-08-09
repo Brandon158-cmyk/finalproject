@@ -38,7 +38,7 @@ const UserCard = async () => {
   }
 
   return (
-    <div className="bg-secondary border-b gap-6 xl:gap-0 flex flex-col xl:flex-row p-6">
+    <div className="bg-white border-b gap-6 xl:gap-0 flex flex-col xl:flex-row p-6">
       <div className="flex gap-6 items-center flex-1">
         <div className="flex flex-col gap-4 w-full pr-6">
           <h1 className="font-bold sm:text-xl lg:text-3xl">
@@ -47,9 +47,9 @@ const UserCard = async () => {
             {user.lastName?.slice(1)}
           </h1>
           <div className="flex flex-col gap-1">
-            <div className="h-2 rounded-full w-full bg-primary/25">
+            <div className="h-2 rounded-sm w-full bg-[#11DD7B]/25">
               <div
-                className="h-2 rounded-full bg-primary"
+                className="h-2 rounded-sm bg-[#11DD7B]"
                 style={{
                   width: `${calculateProgress(removeHundreds(xp), 100)}%`,
                 }}
@@ -66,14 +66,14 @@ const UserCard = async () => {
       </div>
       <div className="flex flex-col gap-4 items-center flex-1">
         <Button
-          className="w-full rounded-xl p-6 bg-transparent border-border flex justify-between hover:!scale-[1.01]"
+          className="w-full rounded-sm p-6 bg-transparent border-border flex justify-between hover:!scale-[1.01]"
           variant={"outline"}
         >
           <span>Earn 10 XP for watching one chapter</span>
           <ArrowRight className="hidden sm:block" />
         </Button>
         <Button
-          className="w-full rounded-xl p-6 bg-transparent border-border flex justify-between hover:!scale-[1.01] animate-pulse cursor-not-allowed"
+          className="w-full rounded-sm p-6 bg-transparent border-border flex justify-between hover:!scale-[1.01] animate-pulse cursor-not-allowed"
           disabled
           variant={"outline"}
         >

@@ -14,11 +14,11 @@ export const InfoCard = ({
   label,
 }: InfoCardProps) => {
   return (
-    <div className="border rounded-md flex items-center gap-x-2 p-3 xl:gap-x-4 xl:px-5 xl:py-4">
-      <Icon />
+    <div className="bg-transparent border rounded-sm flex items-center gap-x-2 p-3 xl:gap-x-4 xl:px-5 xl:py-4">
+      <Icon className="text-primary" />
       <div>
-        <p className="font-medium">{label}</p>
-        <p className="text-gray-500 text-sm">
+        <p className="font-medium text-primary">{label}</p>
+        <p className="text-slate-500 text-sm">
           {numberOfItems} {nameOfItems}
         </p>
       </div>

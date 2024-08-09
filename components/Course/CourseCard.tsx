@@ -34,7 +34,7 @@ const CourseCard = ({
   description,
 }: CourseCardProps) => {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border/50 group max-w-[400px] min-w-[300px] relative group">
+    <div className="overflow-hidden rounded-sm border border-border/50 group max-w-[400px] min-w-[300px] relative group">
       <div className="max-w-[400px] min-w-[300px] h-[195px] overflow-hidden p-3 group-hover:p-[6px] !duration-300 bg-accent/25 group-hover:bg-accent/50">
         <CldImage
           aspectRatio="video"
@@ -42,17 +42,10 @@ const CourseCard = ({
           height={900}
           src={imageUrl}
           alt={"Image"}
-          className="w-full h-full object-cover duration-200 group-hover:scale-[1.12] rounded-xl group-hover:rounded-none"
+          className="w-full h-full object-cover duration-200 group-hover:scale-[1.12] rounded-sm group-hover:rounded-none"
         />
       </div>
       <div className="p-3 pt-0 !duration-300 bg-accent/25 group-hover:bg-accent/50 pt-1">
-        {/* <Badge
-          variant={"outline"}
-          className="absolute top-2 left-2 transition-all duration-200 group-hover:top-0 group-hover:left-0  group-hover:rounded-l-none group-hover:rounded-t-none bg-accent group-hover:border-0 group-hover:pl-1 group-hover:px-3 group-hover:py-[4px] group-hover:rounded-br-xl"
-        >
-          {category}
-        </Badge> */}
-
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <h1 className="font-semibold text-xl mt-1">{title}</h1>
@@ -68,7 +61,7 @@ const CourseCard = ({
                 variant: "secondary",
                 size: progress === 100 ? "icon" : "default",
               }),
-              "rounded-xl bg-primary/10 text-primary opacity-100 hover:bg-accent hover:text-primary"
+              "rounded-sm bg-[#11DD7B]/10 text-[#11DD7B] opacity-100 hover:bg-accent hover:text-primary"
             )}
           >
             {progress !== null ? (
@@ -83,9 +76,9 @@ const CourseCard = ({
           </Link>
           {progress !== null ? (
             <>
-              <div className="flex-1 h-1 rounded-full bg-primary/20">
+              <div className="flex-1 h-1 rounded-sm bg-[#11DD7B]/20">
                 <div
-                  className={`w-[${progress}%] h-full bg-primary rounded-full`}
+                  className={`w-[${progress}%] h-full bg-[#11DD7B] rounded-sm`}
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
