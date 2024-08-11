@@ -1,5 +1,5 @@
 {
-  "name": "nahhas-lms",
+  "name": "punzila-lms",
   "version": "1.5.0",
   "private": true,
   "scripts": {
@@ -38,6 +38,7 @@
     "cloudinary": "^1.41.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "framer-motion": "^11.3.24",
     "lucide-react": "^0.292.0",
     "next": "14.0.3",
     "next-cloudinary": "^5.10.0",

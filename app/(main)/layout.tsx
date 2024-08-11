@@ -3,16 +3,28 @@ import Sidebar from "./_components/Sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-full">
-      <div className="h-[80px] md:pl-[250px] w-full z-50">
-        <Navbar />
-      </div>
-      <div className="hidden md:flex h-full w-[250px] flex-col fixed inset-y-0 z-50">
+    <div className="flex h-screen">
+      {" "}
+      {/* Use h-screen to cover the entire viewport height */}
+      <div className="hidden md:flex flex-col h-full">
+        {" "}
+        {/* Sidebar width and full height */}
         <Sidebar />
       </div>
-      <main className="md:pl-[250px] md:pt-0 overflow-y-scroll">
-        {children}
-      </main>
+      <div className="flex-1 flex flex-col h-full">
+        {" "}
+        {/* Main content area */}
+        <div className="h-[70px] w-full">
+          {" "}
+          {/* Navbar height */}
+          <Navbar />
+        </div>
+        <main className="flex-1 overflow-y-auto">
+          {" "}
+          {/* Make the main content area scrollable */}
+          {children}
+        </main>
+      </div>
     </div>
   );
 };

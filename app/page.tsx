@@ -1,34 +1,48 @@
 import React from "react";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
-import Link from "next/link";
 import Marquee from "react-fast-marquee";
-import { FiExternalLink } from "react-icons/fi";
+import Link from "next/link";
 import Image from "next/image";
 
 // Navbar Component
 const Navbar = () => {
+  const { userId } = auth();
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
-      <div className="container mx-auto flex justify-between items-center py-4">
-        <Link href="/" className="text-2xl font-bold">
-          LMS Logo
-        </Link>
-        <div className="flex gap-4">
-          <Link
-            href="/about"
-            className={cn(buttonVariants({ variant: "ghost" }))}
-          >
-            About
-          </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white">
+      <div className="container mx-auto flex justify-between items-center py-2">
+        <div className="flex p-4 justify-between items-center">
+          <h1 className="font-bold w-auto h-8 flex items-center justify-center gap-3">
+            <div className="!h-8 p-1 !w-8 !aspect-square bg-[#11DD7B] rounded-sm text-lg lg:text-xl flex items-center justify-center !text-primary">
+              P
+            </div>
+            <div className="flex text-primary text-lg md:text-xl items-center gap-1">
+              <span>Punzila</span>
+            </div>
+          </h1>
+        </div>
+        {userId ? (
           <Link
             href="/sign-in"
-            className={cn(buttonVariants({ variant: "default" }))}
+            className={cn(
+              buttonVariants({ size: "sm" }),
+              "w-full sm:w-auto text-center bg-[#11DD7B] text-primary hover:bg-white hover:text-primary"
+            )}
           >
             Sign In
           </Link>
-        </div>
+        ) : (
+          <Link
+            href="/sign-up"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "w-full sm:w-auto text-center bg-[#11DD7B] text-primary hover:bg-white hover:text-primary"
+            )}
+          >
+            Sign Up
+          </Link>
+        )}
       </div>
     </nav>
   );
@@ -104,7 +118,7 @@ const Page = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="max-w-lg mx-auto lg:mx-0">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                  Unleash your creativity with our courses
+                  Ready To Elevate Your Learning?
                 </h1>
                 <p className="text-xl text-muted-foreground mb-8">
                   Join our community of learners and master the skills of
@@ -116,7 +130,7 @@ const Page = () => {
                       href="/dashboard"
                       className={cn(
                         buttonVariants({ size: "lg" }),
-                        "w-full sm:w-auto text-center"
+                        "w-full sm:w-auto text-center bg-[#11DD7B] text-primary hover:bg-white hover:text-primary"
                       )}
                     >
                       Go to Dashboard
@@ -126,7 +140,7 @@ const Page = () => {
                       href="/sign-up"
                       className={cn(
                         buttonVariants({ size: "lg" }),
-                        "w-full sm:w-auto text-center"
+                        "w-full sm:w-auto text-center bg-[#11DD7B] text-primary hover:bg-white hover:text-primary"
                       )}
                     >
                       Start Learning Now
@@ -149,9 +163,9 @@ const Page = () => {
                   alt="Students learning online"
                   width={600}
                   height={400}
-                  className="rounded-lg shadow-2xl"
+                  className="rounded-sm shadow-md"
                 />
-                <div className="absolute -bottom-10 -left-10 bg-primary text-primary-foreground p-6 rounded-lg shadow-lg">
+                <div className="absolute -bottom-10 -left-10 bg-white text-primary p-6 rounded-lg shadow-lg">
                   <p className="text-2xl font-bold mb-2">10,000+</p>
                   <p className="text-sm">Students already learning</p>
                 </div>

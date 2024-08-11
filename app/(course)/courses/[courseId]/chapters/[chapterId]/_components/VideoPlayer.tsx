@@ -74,14 +74,14 @@ const VideoPlayer = ({
   return (
     <div className="relative h-full w-full flex items-center justify-center !aspect-video">
       {!isReady && !isLocked && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-accent w-full gap-2 !aspect-video rounded-2xl border">
-          <Loader2 className="h-6 w-6 animate-spin text-accent-foreground" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary w-full gap-2 !aspect-video rounded-sm border">
+          <Loader2 className="h-6 w-6 animate-spin text-white" />
           Loading
         </div>
       )}
       {isLocked && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-accent w-full gap-2 !aspect-video rounded-2xl border">
-          <FaLock className="h-8 w-8 text-accent-foreground" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary/25 w-full gap-2 !aspect-video rounded-sm border">
+          <FaLock className="h-8 w-8 text-white" />
           <p className="text-sm">This Chapter is locked</p>
         </div>
       )}
@@ -90,7 +90,7 @@ const VideoPlayer = ({
           url={url.includes("youtube.com") ? `${url}?rel=0` : url}
           width={"100%"}
           className={
-            "absolute inset-0 overflow-hidden !aspect-video rounded-2xl border !w-full !h-auto max-h-none"
+            "absolute inset-0 overflow-hidden !aspect-video rounded-sm border !w-full !h-auto max-h-none"
           }
           onReady={() => setIsReady(true)}
           onEnded={onEnd}

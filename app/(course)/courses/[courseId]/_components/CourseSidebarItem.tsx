@@ -46,15 +46,17 @@ const CourseSidebarItem = ({
       onClick={onClick}
       disabled={isLocked}
       className={cn(
-        "flex gap-3 hover:bg-accent items-center cursor-pointer justify-start w-[calc(100%-24px)] mx-3 p-2 rounded-xl",
+        "flex gap-3 hover:bg-white items-center cursor-pointer justify-start w-[calc(100%-24px)] mx-3 p-2 rounded-sm",
         isActive &&
-          "bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary",
+          "bg-[#11DD7B] text-primary hover:bg-white hover:text-primary",
         isLocked && "opacity-50 cursor-not-allowed",
         isCompleted && !isActive && "opacity-50"
       )}
     >
-      <Icon className={cn("!h-4 !w-4",isCompleted && "text-primary")} />
-      <span className={cn("text-sm text-break text-start w-[250px]")}>{label}</span>
+      <Icon className={cn("!h-4 !w-4", isCompleted && "text-white")} />
+      <span className={cn("text-sm text-break text-start w-[250px]")}>
+        {label}
+      </span>
     </button>
   );
 };

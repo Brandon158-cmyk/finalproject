@@ -9,14 +9,14 @@ import CoursesList from "@/components/Course/CoursesList";
 
 interface SearchPageProps {
   searchParams: {
-    title: string,
-    categoryId: string
-  }
+    title: string;
+    categoryId: string;
+  };
 }
 
-const Searchpage = async ({searchParams}: SearchPageProps) => {
-  const {userId} = auth();
-  if(!userId) {
+const Searchpage = async ({ searchParams }: SearchPageProps) => {
+  const { userId } = auth();
+  if (!userId) {
     return redirect("/");
   }
 
@@ -24,12 +24,12 @@ const Searchpage = async ({searchParams}: SearchPageProps) => {
   const courses = await getCourses({
     userId: userId,
     ...searchParams,
-  })
+  });
 
   return (
     <>
-      <Categories items={categories}/>
-      <div className="px-6 overflow-y-scroll bg-secondary mx-0 md:mx-auto py-6 rounded-none md:h-[calc(100vh-170px)] md:rounded-none md:rounded-bl-3xl md:mt-1 md:rounded-tl-xl container">
+      <Categories items={categories} />
+      <div className="px-6 overflow-y-scroll bg-secondary mx-0 md:mx-auto py-6 rounded-none md:h-[calc(100vh-170px)] md:rounded-none md:rounded-sm md:mt-1 md:rounded-tl-xl container">
         <CoursesList items={courses} />
       </div>
     </>

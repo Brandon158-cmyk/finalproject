@@ -1,5 +1,14 @@
 import { SignIn } from "@clerk/nextjs";
- 
+
 export default function Page() {
-  return <SignIn />;
+  return (
+    <SignIn
+      appearance={{
+        elements: {
+          formButtonPrimary:
+            "text-[#11DD7B] bg-primary hover:bg-[#11DD7B] hover:text-primary text-sm",
+        },
+      }}
+    />
+  );
 }

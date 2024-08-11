@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { MdOutlineLeaderboard } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { cn } from "@/lib/utils";
-
 import { BiShoppingBag } from "react-icons/bi";
 
 const guestRoutes = [
@@ -54,7 +53,7 @@ const teacherRoutes = [
   },
 ];
 
-const SidebarRoutes = () => {
+const SidebarRoutes = ({ isCollapsed }) => {
   const pathname = usePathname();
   const isTecacherPage = pathname?.includes("/teacher");
   const routes = isTecacherPage ? teacherRoutes : guestRoutes;
@@ -67,6 +66,7 @@ const SidebarRoutes = () => {
           icon={route.icon}
           label={route.label}
           href={route.href}
+          isCollapsed={isCollapsed} // Pass the collapsed state
         />
       ))}
     </div>

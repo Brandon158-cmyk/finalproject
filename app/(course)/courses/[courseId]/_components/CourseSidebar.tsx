@@ -31,11 +31,11 @@ const CourseSidebar = async ({ course, progressCount }: CourseSidebarProps) => {
   });
 
   return (
-    <div className="w-full h-full flex flex-col gap-y-4 overflow-y-auto bg-secondary m-4 rounded-3xl border">
+    <div className="w-full h-full flex flex-col gap-y-4 overflow-y-auto bg-primary m-4 rounded-sm border">
       <div className="p-6 pb-2">
         <h1
           className={cn(
-            "font-semibold",
+            "font-semibold text-white",
             course.title.length <= 30 && "!text-lg",
             course.title.length <= 20 && "text-xl"
           )}
@@ -44,16 +44,16 @@ const CourseSidebar = async ({ course, progressCount }: CourseSidebarProps) => {
         </h1>
         {purchase && (
           <>
-            <div className="mt-2 rounded-full bg-primary/10">
+            <div className="mt-2 rounded-sm bg-[#11DD7B]">
               <div
-                className={`h-[4px] w-${progressCount} bg-primary rounded-full`}
+                className={`h-[4px] w-${progressCount} bg-[#11DD7B] rounded-sm`}
                 style={{ width: `${progressCount}%` }}
               ></div>
             </div>
             <p
               className={cn(
-                "text-sm text-muted-foreground mt-1",
-                progressCount === 100 && "text-primary"
+                "text-sm text-white mt-1",
+                progressCount === 100 && "text-white"
               )}
             >
               {Math.round(progressCount)}% Complete
