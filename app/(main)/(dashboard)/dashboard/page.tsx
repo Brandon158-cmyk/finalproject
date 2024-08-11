@@ -21,7 +21,7 @@ const Dashboard = async () => {
 
   return (
     <div className="p-6 space-y-4 container">
-      <div className="flex flex-col mb-6 md:gap-1 items-center sm:items-start">
+      {/* <div className="flex flex-col mb-6 md:gap-1 items-center sm:items-start">
         <h1 className="text-lg font-semibold sm:text-xl md:text-2xl sm:font-bold">
           {coursesInProgress.length === 0
             ? "Begin Your Journey"
@@ -32,7 +32,7 @@ const Dashboard = async () => {
             ? "Click Courses in the sidebar to browse and enroll in courses to get started."
             : `Welcome back ${user.firstName}! Track your learning progress below and catch up on your courses.`}
         </p>
-      </div>
+      </div> */}
       <div className="bg-white border rounded-sm overflow-hidden">
         <UserCard />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">

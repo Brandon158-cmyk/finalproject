@@ -34,7 +34,7 @@ const CourseCard = ({
   description,
 }: CourseCardProps) => {
   return (
-    <div className="overflow-hidden rounded-sm border border-border/50 group max-w-[400px] min-w-[300px] relative group">
+    <div className="shadow-sm overflow-hidden rounded-sm border border-primary/20 group max-w-[400px] min-w-[300px] relative group">
       <div className="max-w-[400px] min-w-[300px] h-[195px] overflow-hidden p-3 group-hover:p-[6px] !duration-300 bg-accent/25 group-hover:bg-accent/50">
         <CldImage
           aspectRatio="video"
@@ -46,14 +46,11 @@ const CourseCard = ({
         />
       </div>
       <div className="p-3 pt-0 !duration-300 bg-accent/25 group-hover:bg-accent/50 pt-1">
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col">
-            <h1 className="font-semibold text-xl mt-1">{title}</h1>
-            <h2 className="text-sm text-foreground/90">By: {author}</h2>
-          </div>
-          <h2 className="text-sm text-primary">{category}</h2>
+        <div className="flex flex-col">
+          <h1 className="font-semibold text-lg mt-1">{title}</h1>
+          <h2 className="text-sm text-foreground/90">By: {author}</h2>
         </div>
-        <div className="flex mt-4 gap-2 items-center">
+        <div className="flex gap-2 items-center mt-4">
           <Link
             href={`/courses/${id}`}
             className={cn(
@@ -61,7 +58,7 @@ const CourseCard = ({
                 variant: "secondary",
                 size: progress === 100 ? "icon" : "default",
               }),
-              "rounded-sm bg-[#11DD7B]/10 text-[#11DD7B] opacity-100 hover:bg-accent hover:text-primary"
+              "rounded-sm bg-[#11DD7B]/10 text-green-800 opacity-100 hover:bg-accent hover:text-primary"
             )}
           >
             {progress !== null ? (
@@ -88,7 +85,7 @@ const CourseCard = ({
             <div className="flex flex-col ml-auto gap-1">
               <p className="text-muted-foreground font-light text-sm ml-auto flex gap-0">
                 <BiMoneyWithdraw className={"h-5 w-5 mr-1"} />
-                {price === 0 ? "FREE" : `ZMW ${price}`}
+                {price === 0 ? "FREE" : `K${price}`}
               </p>
               <p className="text-muted-foreground font-light text-sm ml-auto flex">
                 <Video className={"h-5 w-5 mr-1"} />

@@ -32,7 +32,7 @@ function Page() {
         <div className="flex flex-row items-center justify-between rounded-lg border p-4">
           <div className="space-y-0.5">
             <h3 className="text-base font-semibold">Tutor Account</h3>
-            <p>You can publish courses to yatu. Go to the tutor dashboard</p>
+            <p>You can publish courses to Punzila. Go to the tutor dashboard</p>
           </div>
           <div>
             <Button asChild>
