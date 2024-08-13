@@ -9,10 +9,15 @@ interface SidebarItemProps {
   icon: IconType | LucideIcon;
   label: string;
   href: string;
-  isCollapsed: boolean;
+  isCollapsed?: boolean;
 }
 
-const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
+const SidebarItem = ({
+  isCollapsed,
+  icon: Icon,
+  label,
+  href,
+}: SidebarItemProps) => {
   const pathname = usePathname();
   const isActive =
     (pathname === "/" && href === "/") ||
