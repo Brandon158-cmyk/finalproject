@@ -50,7 +50,6 @@ const page = async ({ params }: ChapterProps) => {
 
       <div className="flex flex-col mx-auto !pb-10">
         <div className="pb-4 md:pb-6 w-full">
-          
           <VideoPlayer
             url={chapter.videoUrl || ""}
             isLocked={isLocked}

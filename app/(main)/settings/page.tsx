@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { SignOutButton, useAuth } from "@clerk/nextjs";
+import { SignOutButton, useAuth, UserButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -29,14 +29,17 @@ function Page() {
           </p>
         </div>
 
-        <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+        <div className="flex flex-row items-center justify-between rounded-sm border p-4">
           <div className="space-y-0.5">
-            <h3 className="text-base font-semibold">Tutor Account</h3>
+            <h3 className="text-base font-semibold">Tutor Dashboard</h3>
             <p>You can publish courses to Punzila. Go to the tutor dashboard</p>
           </div>
           <div>
-            <Button asChild>
-              <Link href="/teacher/courses" className="w-full">
+            <Button
+              className="rounded-sm bg-[#11DD7B] text-primary hover:bg-white"
+              asChild
+            >
+              <Link href="/teacher/courses" className="w-full rounded-sm">
                 Dashboard
               </Link>
             </Button>
@@ -102,30 +105,13 @@ function Page() {
               disabled={theme === "system"}
               onClick={() => setTheme("system")}
             >
-              <div className="items-center rounded-md border-2 border-muted bg-popover p-1 hover:bg-accent hover:text-accent-foreground h-full !h-[148px] w-[168px] text-3xl font-bold cursor-pointer flex items-center justify-center">
+              <div className="items-center rounded-sm border-2 border-muted bg-popover p-1 hover:bg-accent hover:text-accent-foreground h-full !h-[148px] w-[168px] text-3xl font-bold cursor-pointer flex items-center justify-center">
                 ?
               </div>
               <span className="block w-full p-2 text-center font-normal">
                 System
               </span>
             </button>
-          </div>
-        </div>
-        <div className="pb-10">
-          <h3 className="text-lg font-medium">Links</h3>
-          <p className="text-sm text-muted-foreground">
-            I don&apos;t know what to write here :D
-          </p>
-          <div className="flex pt-4 gap-4 items-center flex-wrap">
-            <Link
-              className={buttonVariants({ variant: "outline" })}
-              href={"https://github.com/AbdulrahmanNahhas/nahhas-lms"}
-            >
-              Github
-            </Link>
-            <Button variant={"outline"} disabled>
-              Donate
-            </Button>
           </div>
         </div>
 
@@ -138,14 +124,14 @@ function Page() {
           <div className="flex flex-col">
             <div className="flex gap-1 items-start">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Danger Zone</AlertTitle>
+              <AlertTitle>Sign Out</AlertTitle>
             </div>
             <AlertDescription>
               Do you want to sign out from your account?
             </AlertDescription>
           </div>
           <div>
-            <Button variant="destructive" className="mx-auto">
+            <Button variant="destructive" className="mx-auto rounded-sm">
               <SignOutButton signOutCallback={() => redirect("/")} />
             </Button>
           </div>

@@ -15,9 +15,9 @@ const NavbarRoutesClient = () => {
   return (
     <>
       {isTecacherPage || isPlayerPage ? (
-        <Button variant={"ghost"} asChild>
-          <Link href="/dashboard">
-            <LogOut className="h-4 w-4 mr-2" />
+        <Button className="rounded-sm" variant={"outline"} asChild>
+          <Link href="/search">
+            <LogOut className="font-bold h-4 w-4 mr-2" />
             Exit
           </Link>
         </Button>

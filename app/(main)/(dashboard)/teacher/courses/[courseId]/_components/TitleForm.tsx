@@ -59,7 +59,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   };
 
   return (
-    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-lg p-4  ">
+    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-sm p-4  ">
       <div className="font-medium text-lg flex items-start justify-between">
         <span className="flex items-center justify-center gap-2">
           {isSubmitting && <BiLoader className="animate-spin w-5 h-5" />}
@@ -67,7 +67,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
             Course Title & Teacher <span className="text-red-500">*</span>
           </span>
         </span>
-        <Button variant={"ghost"} onClick={toggleEdit}>
+        <Button className="rounded-sm" variant={"ghost"} onClick={toggleEdit}>
           {isEditing ? (
             <>
               <MdOutlineCancel className="h-4 w-4 mr-2" />
@@ -91,7 +91,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
               control={form.control}
               name="title"
               render={({ field }) => (
-                <FormItem className="w-full">
+                <FormItem className="w-full rounded-sm">
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
@@ -111,7 +111,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="John Doe'"
+                      placeholder="Brandon'"
                       {...field}
                     />
                   </FormControl>
@@ -120,7 +120,11 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
+              <Button
+                className="rounded-sm"
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
                 Save Changes
               </Button>
             </div>
@@ -129,9 +133,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
       ) : (
         <div className="mt-0 text-sm">
           <p className="text-lg font-bold mb-1">{initialData.title}</p>
-          <p>
-            By: {initialData.author}
-          </p>
+          <p>By: {initialData.author}</p>
         </div>
       )}
     </div>

@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
 import { useState } from "react";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { BiLoader } from "react-icons/bi";
 import { toast } from "sonner";
@@ -35,7 +41,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || ""
+      description: initialData?.description || "",
     },
   });
 
@@ -44,7 +50,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       console.log(values);
-      await axios.patch(`/api/courses/${courseId}`, values)
+      await axios.patch(`/api/courses/${courseId}`, values);
       toast.success("Course Updated!");
       toggleEdit();
       router.refresh();
@@ -54,7 +60,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   };
 
   return (
-    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-lg p-4  ">
+    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-sm p-4  ">
       <div className="font-medium text-lg flex items-start justify-between">
         <span className="flex items-center justify-center gap-2">
           {isSubmitting && <BiLoader className="animate-spin w-5 h-5" />}
@@ -62,7 +68,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
             Course Description <span className="text-red-500">*</span>
           </span>
         </span>
-        <Button variant={"ghost"} onClick={toggleEdit}>
+        <Button className="rounded-sm" variant={"ghost"} onClick={toggleEdit}>
           {isEditing ? (
             <>
               <MdOutlineCancel className="h-4 w-4 mr-2" />
@@ -78,25 +84,44 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
       </div>
       {isEditing ? (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-3">
-            <FormField control={form.control} name="description" render={({field} ) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Textarea disabled={isSubmitting} placeholder="e.g. 'This course is about...'" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}></FormField>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 mt-3"
+          >
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormControl>
+                    <Textarea
+                      disabled={isSubmitting}
+                      placeholder="e.g. 'This course is about...'"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
             <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting}
-              type="submit">
+              <Button
+                className="rounded-sm"
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
                 Save Changes
               </Button>
             </div>
           </form>
         </Form>
       ) : (
-        <p className={cn("mt-0 text-sm", !initialData.description && "text-muted-foreground italic")}>
+        <p
+          className={cn(
+            "mt-0 text-sm",
+            !initialData.description && "text-muted-foreground italic"
+          )}
+        >
           {initialData.description || "No description"}
         </p>
       )}

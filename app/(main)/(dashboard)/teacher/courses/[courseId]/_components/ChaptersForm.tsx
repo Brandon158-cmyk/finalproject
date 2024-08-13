@@ -79,7 +79,7 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
   };
 
   return (
-    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-lg p-4 relative overflow-hidden">
+    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-sm p-4 relative overflow-hidden">
       {isUpdating && (
         <div className="bg-background/75 absolute top-0 h-full w-full left-0 flex items-center justify-center">
           <BiLoader className="animate-spin w-6 h-6 md:w-10 md:h-10" />
@@ -89,7 +89,11 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
         <span>
           Course Chapter <span className="text-red-500">*</span>
         </span>
-        <Button variant={"ghost"} onClick={toggleCreating}>
+        <Button
+          className="rounded-sm"
+          variant={"ghost"}
+          onClick={toggleCreating}
+        >
           {isCreating ? (
             <>
               <MdOutlineCancel className="h-4 w-4 mr-2" />
@@ -114,7 +118,7 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
               control={form.control}
               name="title"
               render={({ field }) => (
-                <FormItem className="w-full">
+                <FormItem className="w-full rounded-sm">
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
@@ -127,7 +131,11 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
               )}
             ></FormField>
             <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
+              <Button
+                className="rounded-sm"
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
                 {!isValid ||
                   (isSubmitting && <BiLoader className="mr-1 animate-spin" />)}
                 Create
@@ -140,7 +148,7 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
           className={cn(
             "mt-2 text-sm",
             !initialData.chapters.length &&
-              "text-muted-foreground italic bg-accent p-4 md:p-6 text-center rounded-lg cursor-not-allowed"
+              "text-muted-foreground italic bg-accent p-4 md:p-6 text-center rounded-sm cursor-not-allowed"
           )}
         >
           {!initialData.chapters.length ? (

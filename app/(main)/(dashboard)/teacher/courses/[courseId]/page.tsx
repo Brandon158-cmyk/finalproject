@@ -86,7 +86,7 @@ const Course = async ({ params }: { params: { courseId: string } }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-12 gap-6 w-full">
           <div className="space-y-6">
             <div className="flex items-center gap-x-2">
-              <BiSolidCustomize className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
+              <BiSolidCustomize className="w-8 h-8 p-2 bg-accent rounded-sm text-primary" />
               <h2 className="text-xl">Customize your course</h2>
             </div>
             <TitleForm initialData={course} courseId={courseId} />
@@ -103,12 +103,12 @@ const Course = async ({ params }: { params: { courseId: string } }) => {
           </div>
           <div className="space-y-6">
             <div className="flex items-center gap-x-2">
-              <FaListCheck className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
+              <FaListCheck className="w-8 h-8 p-2 bg-accent rounded-sm text-primary" />
               <h2 className="text-xl">Course chapters</h2>
             </div>
             <ChaptersForm initialData={course} courseId={courseId} />
             <div className="flex items-center gap-x-2">
-              <BsCurrencyDollar className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
+              <BsCurrencyDollar className="w-8 h-8 p-2 bg-accent rounded-sm text-primary" />
               <h2 className="text-xl">Set a price</h2>
             </div>
             <PriceForm initialData={course} courseId={courseId} />

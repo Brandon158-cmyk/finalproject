@@ -56,7 +56,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
   };
 
   return (
-    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-lg p-4  ">
+    <div className=" border bg-accent/50 dark:bg-accent/20 rounded-sm p-4  ">
       <div className="font-medium text-lg flex items-start justify-between">
         <span className="flex items-center justify-center gap-2">
           {isSubmitting && <BiLoader className="animate-spin w-5 h-5" />}
@@ -64,7 +64,12 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             Course Image <span className="text-red-500">*</span>
           </span>
         </span>
-        <Button variant={"ghost"} onClick={toggleEdit} disabled={isSubmitting}>
+        <Button
+          className="rounded-sm"
+          variant={"ghost"}
+          onClick={toggleEdit}
+          disabled={isSubmitting}
+        >
           {isEditing && (
             <>
               <MdOutlineCancel className="h-4 w-4 mr-2" />
@@ -146,12 +151,12 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             height={900}
             src={initialData?.imageUrl}
             alt={"Image"}
-            className="rounded-3xl border"
+            className="rounded-sm border"
           />
         </div>
       )}
       {!isEditing && !initialData.imageUrl && (
-        <div className="flex items-center justify-center h-60 bg-accent rounded-xl mt-2 cursor-not-allowed">
+        <div className="flex items-center justify-center h-60 bg-accent rounded-sm mt-2 cursor-not-allowed">
           <FaImage className="h-10 w-10 text-muted-foreground" />
         </div>
       )}

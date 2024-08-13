@@ -44,6 +44,7 @@ const Actions = ({ disabled, courseId, isPublished }: ChapterActionsProps) => {
   return (
     <div className="flex items-center justify-center gap-x-2">
       <Button
+        className="rounded-sm"
         disabled={disabled || isLoading}
         onClick={onClick}
         variant="outline"
@@ -55,6 +56,7 @@ const Actions = ({ disabled, courseId, isPublished }: ChapterActionsProps) => {
           size={"icon"}
           disabled={isLoading}
           variant="destructive"
+          className="rounded-sm"
         >
           {isLoading ? (
             <Loader2 className="mr-1 animate-spin p-1" />

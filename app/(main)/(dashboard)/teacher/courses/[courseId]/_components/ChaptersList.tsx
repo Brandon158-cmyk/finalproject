@@ -2,7 +2,12 @@
 
 import { Chapter } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 import { MdDragIndicator } from "react-icons/md";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -21,12 +26,12 @@ const ChaptersList = ({ items, onEdit, onReorder }: ChaptersListProps) => {
 
   useEffect(() => {
     setIsMounted(true);
-  }, [])
+  }, []);
   useEffect(() => {
     setChapters(items);
-  }, [items])
+  }, [items]);
   if (!isMounted) {
-    return null
+    return null;
   }
 
   const onDragEnd = (result: DropResult) => {
@@ -45,11 +50,11 @@ const ChaptersList = ({ items, onEdit, onReorder }: ChaptersListProps) => {
 
     const bulkUpdateData = updatedChapters.map((chapter) => ({
       id: chapter.id,
-      position: items.findIndex((item) => item.id === chapter.id)
+      position: items.findIndex((item) => item.id === chapter.id),
     }));
 
     onReorder(bulkUpdateData);
-  }
+  };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -57,16 +62,17 @@ const ChaptersList = ({ items, onEdit, onReorder }: ChaptersListProps) => {
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
-              <Draggable 
-                key={chapter.id} 
-                draggableId={chapter.id} 
+              <Draggable
+                key={chapter.id}
+                draggableId={chapter.id}
                 index={index}
               >
                 {(provided) => (
                   <div
                     className={cn(
-                      "flex items-center gap-x-2 bg-slate-100 border-border dark:bg-accent/25 border text-foreground rounded-md mb-4 text-sm overflow-hidden",
-                      chapter.isPublished && "!bg-primary/10 border-primary/25"
+                      "flex items-center gap-x-2 bg-slate-100 border-border dark:bg-accent/25 border text-foreground rounded-sm mb-4 text-sm overflow-hidden",
+                      chapter.isPublished &&
+                        "!bg-[#11DD7B]/25 border-primary/25"
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
@@ -74,23 +80,34 @@ const ChaptersList = ({ items, onEdit, onReorder }: ChaptersListProps) => {
                     <div
                       className={cn(
                         "px-2 py-3 border-r border-border hover:bg-slate-300 dark:hover:bg-accent transition",
-                        chapter.isPublished && "bg-accent/10 border-primary/25 hover:bg-primary/70 dark:hover:!bg-primary/50 hover:text-primary-foreground"
+                        chapter.isPublished &&
+                          "bg-accent/10 border-primary/25 hover:bg-primary/70 dark:hover:!bg-primary/50 hover:text-primary-foreground"
                       )}
                       {...provided.dragHandleProps}
                     >
-                      <MdDragIndicator
-                        className="h-5 w-5"
-                      />
+                      <MdDragIndicator className="h-5 w-5" />
                     </div>
                     {chapter.title}
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
-                      <AiFillEyeInvisible className={chapter.isPublished ? "!hidden" : "noselect cursor-default block md:hidden lg:block xl:hidden w-4 h-4 hover:opacity-80 text-muted-foreground"} />
+                      <AiFillEyeInvisible
+                        className={
+                          chapter.isPublished
+                            ? "!hidden"
+                            : "noselect cursor-default block md:hidden lg:block xl:hidden w-4 h-4 hover:opacity-80 text-muted-foreground"
+                        }
+                      />
                       {chapter.isFree && (
-                        <Badge variant={"secondary"} className="noselect cursor-default border border-border px-[7px]">
+                        <Badge
+                          variant={"secondary"}
+                          className="bg-[#11DD7B] text-primary noselect cursor-default border border-border px-[7px]"
+                        >
                           Free
                         </Badge>
                       )}
-                      <Badge variant={"default"} className="font-normal text-xs px-2 hidden md:block lg:hidden xl:block cursor-default noselect">
+                      <Badge
+                        variant={"default"}
+                        className="font-normal text-xs px-2 hidden md:block lg:hidden xl:block cursor-default noselect"
+                      >
                         {chapter.isPublished ? "Published" : "Draft"}
                       </Badge>
                       <FaPencil
