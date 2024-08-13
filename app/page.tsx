@@ -24,7 +24,7 @@ const Navbar = () => {
         </div>
         {userId ? (
           <Link
-            href="/sign-in"
+            href="/search"
             className={cn(
               buttonVariants({ size: "sm" }),
               "w-full sm:w-auto text-center bg-[#11DD7B] text-primary hover:bg-white hover:text-primary"

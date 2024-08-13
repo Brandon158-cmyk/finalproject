@@ -34,7 +34,7 @@ const CourseEnrollButton = ({ courseId, price }: CourseEnrollButtonProps) => {
       disabled={isLoading}
       onClick={onClick}
     >
-      Enroll: {formatPrice(price)}
+      Enroll For: {price === 0 ? "Free" : `${formatPrice(price)}`}
     </Button>
   );
 };

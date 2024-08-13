@@ -1,4 +1,5 @@
 "use client";
+"use client";
 
 import qs from "query-string";
 import { Search } from "lucide-react";
@@ -7,9 +8,8 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
-import { cn } from "@/lib/utils";
 
-const SearchInput = ({ className }: { className?: string }) => {
+export const SearchInput = ({ className }: { className?: string }) => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value);
 
@@ -28,22 +28,19 @@ const SearchInput = ({ className }: { className?: string }) => {
           title: debouncedValue,
         },
       },
-      { skipEmptyString: true, skipNull: true }
+      { skipNull: true, skipEmptyString: true }
     );
 
     router.push(url);
   }, [debouncedValue, currentCategoryId, router, pathname]);
 
   return (
-    <div className={cn("relative", className)}>
+    <div className="relative">
       <Search className="h-4 w-4 absolute top-3 left-3 text-slate-600" />
       <Input
-        onChange={(e) => {
-          router.push("/search");
-          setValue(e.target.value);
-        }}
+        onChange={(e) => setValue(e.target.value)}
         value={value}
-        className="w-full pl-9 text-secondary-foreground rounded-sm focus-visible:ring-primary/50"
+        className="w-full md:w-[500px] pl-9 rounded-sm bg-slate-100 focus-visible:ring-slate-200"
         placeholder="Search for a course"
       />
     </div>

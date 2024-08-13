@@ -1,11 +1,14 @@
 import { getCourses } from "@/actions/get-courses";
 import { auth, clerkClient } from "@clerk/nextjs";
 import { db } from "@/lib/db";
+import { Suspense } from "react";
 
 import Categories from "./_components/Categories";
 import SearchInput from "@/components/SearchInput";
 import { redirect } from "next/navigation";
 import CoursesList from "@/components/Course/CoursesList";
+
+export const revalidate = 0;
 
 interface SearchPageProps {
   searchParams: {
@@ -20,7 +23,11 @@ const Searchpage = async ({ searchParams }: SearchPageProps) => {
     return redirect("/");
   }
 
-  const categories = await db.category.findMany();
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
   const courses = await getCourses({
     userId: userId,
     ...searchParams,
@@ -28,9 +35,14 @@ const Searchpage = async ({ searchParams }: SearchPageProps) => {
 
   return (
     <>
-      <Categories items={categories} />
-      <div className="px-6 overflow-y-scroll bg-secondary mx-0 md:mx-auto py-6 rounded-none md:h-[calc(100vh-170px)] md:rounded-none md:rounded-sm md:mt-1 md:rounded-tl-xl container">
-        <CoursesList items={courses} />
+      <div className="px-6 pt-6 md:hidden md:mb-0 block">
+        <SearchInput />
+      </div>
+      <div className="p-6 space-y-4">
+        <Categories items={categories} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CoursesList items={courses} />
+        </Suspense>
       </div>
     </>
   );
