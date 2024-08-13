@@ -33,7 +33,7 @@ const CourseCard = ({
   description,
 }: CourseCardProps) => {
   return (
-    <div className="shadow-sm overflow-hidden rounded-sm border border-primary/20 group max-w-[400px] min-w-[300px] h-[350px] flex flex-col">
+    <div className="bg-white shadow-sm overflow-hidden rounded-sm border border-primary/20 group max-w-[400px] min-w-[300px] h-[350px] flex flex-col">
       {/* Image Section */}
       <div className="h-[195px] overflow-hidden p-3 group-hover:p-[6px] !duration-300 bg-accent/25 group-hover:bg-accent/50">
         <CldImage
@@ -49,8 +49,8 @@ const CourseCard = ({
       {/* Content Section */}
       <div className="p-3 flex-grow flex flex-col justify-between !duration-300 bg-accent/25 group-hover:bg-accent/50">
         <div className="flex flex-col">
-          <h1 className="font-semibold text-lg mt-1">{title}</h1>
-          <h2 className="text-sm text-foreground/90">By: {author}</h2>
+          <h1 className="font-regular text-lg mt-1">{title}</h1>
+          <h2 className="text-xs text-foreground/90">With: {author}</h2>
         </div>
 
         <div className="flex items-center mt-4 gap-2">
