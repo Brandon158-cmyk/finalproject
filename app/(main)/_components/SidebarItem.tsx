@@ -3,11 +3,13 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IconType } from "react-icons";
 
 interface SidebarItemProps {
-  icon: LucideIcon;
+  icon: IconType | LucideIcon;
   label: string;
   href: string;
+  isCollapsed: boolean;
 }
 
 const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {

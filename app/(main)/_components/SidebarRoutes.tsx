@@ -7,6 +7,8 @@ import { MdOutlineLeaderboard } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import { BiShoppingBag } from "react-icons/bi";
+import { IconType } from "react-icons";
+import { LucideIcon } from "lucide-react";
 
 const guestRoutes = [
   {
@@ -53,11 +55,20 @@ const teacherRoutes = [
   },
 ];
 
-const SidebarRoutes = ({ isCollapsed }) => {
+interface SidebarRoutesProps {
+  isCollapsed: boolean;
+}
+
+interface RouteType {
+  icon: IconType | LucideIcon;
+  label: string;
+  href: string;
+}
+
+const SidebarRoutes: React.FC<SidebarRoutesProps> = ({ isCollapsed }) => {
   const pathname = usePathname();
   const isTecacherPage = pathname?.includes("/teacher");
   const routes = isTecacherPage ? teacherRoutes : guestRoutes;
-
   return (
     <div className={cn("flex flex-col w-full py-6 gap-2")}>
       {routes.map((route, index) => (
@@ -66,7 +77,7 @@ const SidebarRoutes = ({ isCollapsed }) => {
           icon={route.icon}
           label={route.label}
           href={route.href}
-          isCollapsed={isCollapsed} // Pass the collapsed state
+          isCollapsed={isCollapsed}
         />
       ))}
     </div>
