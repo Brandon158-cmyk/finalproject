@@ -4,9 +4,11 @@ import SearchInput from "@/components/SearchInput";
 
 const Navbar = () => {
   return (
-    <div className="p-6 h-full flex items-center md:bg-white bg-white">
+    <div className="container left-0 right-0 p-6 h-full w-full flex items-center bg-white">
       <MobileSidebar />
-      <SearchInput className="w-full md:max-w-[500px] max-w-none" />
+      <div className="hidden md:flex w-full items-center">
+        <SearchInput className="w-full md:max-w-[500px] max-w-none" />
+      </div>
       <NavbarRoutes />
     </div>
   );

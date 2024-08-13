@@ -27,7 +27,7 @@ interface CategoriesProps {
 
 const Categories = ({ items }: CategoriesProps) => {
   return (
-    <div className="flex items-center gap-x-2 overflow-x-auto py-3 px-3 bg-secondary md:rounded-sm md:rounded-sm container mx-auto">
+    <div className="flex items-center gap-x-2 overflow-x-auto py-3 px-3 bg-white md:rounded-sm md:rounded-sm container mx-auto">
       {items.map((category) => (
         <CategoryItem
           key={category.id}
