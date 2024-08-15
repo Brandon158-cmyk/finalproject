@@ -23,10 +23,10 @@ const NavbarRoutes = async () => {
   return (
     <div className="flex gap-x-2 ml-auto items-center justify-end w-full">
       <NavbarRoutesClient />
-      <div className="flex items-center justify-center bg-primary rounded-sm py-2 px-2 pl-2">
-        <div className="flex items-center gap-1 pr-2 text-sm text-white">
-          <Star className="text-white w-4 h-4 fill-white" />
-          {xp}
+      <div className="flex items-center justify-center rounded-sm py-2 px-2 pl-2">
+        <div className="flex items-center gap-1 pr-2 text-sm text-primary font-medium">
+          <Star className="text-primary w-4 h-4 fill-[#11DD7B]" />
+          {xp} <p>Points</p>
         </div>
         <div className="flex items-center gap-2 pl-2">
           <UserButton afterSignOutUrl="/" />
