@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
-import { Settings } from "lucide-react";
+import { Settings, ChevronLeft, ChevronRight } from "lucide-react";
 import SidebarRoutes from "./SidebarRoutes";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -43,7 +42,7 @@ const Sidebar = () => {
           className="text-white hidden md:flex bg-primary ml-auto"
           onClick={toggleSidebar}
         >
-          <Menu />
+          {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
         </Button>
       </div>
 
