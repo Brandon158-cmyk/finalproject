@@ -6,6 +6,7 @@ import React from "react";
 import CourseSidebar from "./_components/CourseSidebar";
 import CourseNavbar from "./_components/CourseNavbar";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const layout = async ({
   children,
@@ -56,7 +57,7 @@ const layout = async ({
       <div className="hidden lg:flex h-full w-[350px] inset-y-0 z-50 fixed top-0 left-0">
         <CourseSidebar course={course} progressCount={progressCount} />
       </div>
-      <main className="lg:pl-[350px] h-full">{children}<Analytics /></main>
+      <main className="lg:pl-[350px] h-full">{children}<Analytics /><SpeedInsights /></main>
     </div>
   );
 };
