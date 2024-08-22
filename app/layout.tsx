@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/Providers/ThemeProvidder";
@@ -29,6 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Analytics />
             <ToasterPrivder />
           </ThemeProvider>
         </body>
