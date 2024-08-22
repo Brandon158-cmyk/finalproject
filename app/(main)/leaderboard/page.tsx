@@ -1,14 +1,40 @@
-import React from 'react'
+import { auth, clerkClient } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import LeaderboardTable from "../_components/LeaderboardTable";
 
-const page = () => {
+const LeaderboardPage = async () => {
+  const { userId } = auth();
+  if (!userId) {
+    return redirect("/");
+  }
+
+  const users = await clerkClient.users.getUserList({ limit: 100 });
+
+  const sortedUsers = users.sort(
+    (a, b) =>
+      ((b.publicMetadata.xp as number) || 0) -
+      ((a.publicMetadata.xp as number) || 0)
+  );
+
+  const leaderboardData = users.map((user, index) => ({
+    rank: index + 1,
+    name: `${user.firstName} ${user.lastName}`,
+    xp: (user.publicMetadata.xp as number) || 0,
+    image: user.imageUrl,
+  }));
+
+  const currentUser = `${users.find((u) => u.id === userId)?.firstName} ${
+    users.find((u) => u.id === userId)?.lastName
+  }`;
+
   return (
-    <div className='min-h-[calc(100vh-80px)] md:min-h-screen flex items-center justify-center flex-col'>
-      <h1 className='font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-muted-foreground'>
-        Coming Soon
-      </h1>
-      <p className='text-muted-foreground md:text-lg mt-2'>Points system in development...</p>
+    <div className="container mx-auto p-6 md:p-12 bg-secondary/50 text-secondary-foreground min-h-[calc(100vh-80px)] md:rounded-tl-3xl">
+      <h1 className="text-4xl font-bold mb-8">Leaderboard</h1>
+      <div className="bg-card shadow-md rounded-lg overflow-hidden">
+        <LeaderboardTable data={leaderboardData} currentUserId={currentUser} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default LeaderboardPage;
