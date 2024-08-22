@@ -2,6 +2,7 @@ import React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
+import { clerkClient } from "@clerk/nextjs";
 import Marquee from "react-fast-marquee";
 import Link from "next/link";
 import Image from "next/image";
@@ -72,8 +73,9 @@ const CourseImage = ({ course }: { course: Course }) => {
 };
 
 // Main Page Component
-const Page = () => {
+const Page = async () => {
   const { userId } = auth();
+  const userCount = await clerkClient.users.getCount();
 
   const courses = [
     {
@@ -166,7 +168,7 @@ const Page = () => {
                   className="rounded-sm shadow-md"
                 />
                 <div className="absolute -bottom-10 -left-10 bg-white text-primary p-6 rounded-lg shadow-lg">
-                  <p className="text-2xl font-bold mb-2">10,000+</p>
+                  <p className="text-2xl font-bold mb-2">{userCount.toLocaleString()}+</p>
                   <p className="text-sm">Students already learning</p>
                 </div>
               </div>
