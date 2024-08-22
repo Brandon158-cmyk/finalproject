@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./_components/Navbar";
 import Sidebar from "./_components/Sidebar";
 
@@ -23,6 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           {" "}
           {/* Make the main content area scrollable */}
           {children}
+          <Analytics />
         </main>
       </div>
     </div>
