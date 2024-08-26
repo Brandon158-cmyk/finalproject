@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
@@ -23,52 +23,64 @@ const CourseProgressButton = ({
 }: CourseProgressButtonProps) => {
   const router = useRouter();
   const confetti = useConfettiStore();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
 
       const promise = async () => {
-        await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
-          isCompleted: !isCompleted,
-        })
-      
-        if(!isCompleted && !nextChapterId) {
-          confetti.onOpen()
+        await axios.put(
+          `/api/courses/${courseId}/chapters/${chapterId}/progress`,
+          {
+            isCompleted: !isCompleted,
+          }
+        );
+
+        if (!isCompleted && !nextChapterId) {
+          confetti.onOpen();
         }
-      
-        if(!isCompleted && nextChapterId) {
-          router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+
+        if (!isCompleted && nextChapterId) {
+          router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
         }
-      
-        return 'Chapter updated successfully';
+
+        return "Chapter updated successfully";
       };
 
       toast.promise(promise, {
-        loading: 'Loading...',
+        loading: "Loading...",
         success: (data) => {
           setIsLoading(false);
           router.refresh();
           return data;
         },
-        error: 'Something went wrong',
+        error: "Something went wrong",
       });
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
       {isCompleted ? (
-        <Button onClick={onClick} disabled={isLoading} variant="destructive" className="flex gap-2 items-center">
+        <Button
+          onClick={onClick}
+          disabled={isLoading}
+          variant='destructive'
+          className='flex gap-2 items-center rounded-none'
+        >
           Mark as not completed <FaX />
         </Button>
       ) : (
-        <Button onClick={onClick} disabled={isLoading} className="flex gap-2 items-center">
+        <Button
+          onClick={onClick}
+          disabled={isLoading}
+          className='flex gap-2 items-center rounded-none'
+        >
           Mark as completed <FaCheck />
         </Button>
       )}
