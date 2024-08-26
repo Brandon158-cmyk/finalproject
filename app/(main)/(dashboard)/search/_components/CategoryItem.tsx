@@ -44,10 +44,9 @@ const CategoryItem = ({ label, value, icon: Icon }: CategoryItemProps) => {
         "py-2 px-3 text-sm border border rounded-sm flex items-center gap-x-2 hover:border-primary/50 transition",
         isSelected && "border-primary/90 bg-primary/75 text-primary-foreground"
       )}
-      type="button"
+      type='button'
     >
-      {/* {Icon && <Icon size={18} />} */}
-      <div className="truncate">{label}</div>
+      <div className='truncate'>{label}</div>
     </button>
   );
 };

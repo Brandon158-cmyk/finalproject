@@ -1,14 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react"
-import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { Roboto } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/Providers/ThemeProvidder";
 import ToasterPrivder from "@/components/Providers/ToasterPrivder";
 import ConfettiProvider from "@/components/Providers/ConfettiProvider";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Punzila Digital Learning Platform",
@@ -22,12 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
+      <html lang='en'>
+        <body className={roboto.className}>
           <ConfettiProvider />
           <ThemeProvider
-            attribute="class"
-            defaultTheme="root"
+            attribute='class'
+            defaultTheme='root'
             disableTransitionOnChange
           >
             {children}
