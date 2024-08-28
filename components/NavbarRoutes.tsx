@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import Link from "next/link";
 import LogOutButton from "./LogOutButton";
 import { MdStars } from "react-icons/md";
+import { IoMdTrophy } from "react-icons/io";
 
 const NavbarRoutes = async () => {
   const { userId } = auth();
@@ -20,7 +21,7 @@ const NavbarRoutes = async () => {
       <NavbarRoutesClient />
       <div className='flex items-center justify-center rounded-none py-2 px-2 pl-2'>
         <div className='flex items-center gap-1 pr-2 text-sm text-[#2A2B2E]'>
-          <MdStars className='w-5 h-5 text-green-700 animate-pulse' />
+          <IoMdTrophy className='w-5 h-5 text-yellow-600 animate-pulse' />
           <div className='flex items-center justify-center gap-1'>
             {xp} <p>Points</p>
           </div>

@@ -24,7 +24,7 @@ const guestRoutes = [
   {
     icon: MdOutlineLeaderboard,
     label: "Leaderboard",
-    href: "/leaderboard",
+    href: "/rankings",
   },
   {
     icon: BiShoppingBag,
