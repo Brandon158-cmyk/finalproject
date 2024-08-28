@@ -45,7 +45,12 @@ const Dashboard = async () => {
         </div>
       </div>
       <div className='bg-secondary border rounded-sm overflow-hidden p-5'>
-        <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+        <CoursesList
+          items={[...coursesInProgress, ...completedCourses].map((course) => ({
+            ...course,
+            enrollmentCount: 0, // or fetch the actual count if available
+          }))}
+        />
       </div>
     </div>
   );
