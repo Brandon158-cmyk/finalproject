@@ -33,27 +33,32 @@ const CourseCard = ({
   description,
 }: CourseCardProps) => {
   return (
-    <div className="bg-white shadow-sm overflow-hidden rounded-sm border border-primary/20 group max-w-[400px] min-w-[300px] h-[350px] flex flex-col">
+    <div className='bg-white shadow-sm overflow-hidden rounded-sm border border-primary/20 group max-w-[400px] min-w-[300px] h-[350px] flex flex-col justify-between'>
       {/* Image Section */}
-      <div className="h-[195px] overflow-hidden p-3 group-hover:p-[6px] !duration-300 bg-accent/25 group-hover:bg-accent/50">
+      <div className='h-[195px] overflow-hidden !duration-300 bg-accent/25 group-hover:bg-accent/50'>
         <CldImage
-          aspectRatio="video"
+          aspectRatio='video'
           width={1600}
           height={900}
           src={imageUrl}
           alt={"Image"}
-          className="w-full h-full object-cover duration-200 group-hover:scale-[1.12] rounded-sm group-hover:rounded-none"
+          className='w-full object-cover duration-200 group-hover:scale-[1.12] rounded-none group-hover:rounded-none'
         />
       </div>
 
       {/* Content Section */}
-      <div className="p-3 flex-grow flex flex-col justify-between !duration-300 bg-accent/25 group-hover:bg-accent/50">
-        <div className="flex flex-col">
-          <h1 className="font-regular text-lg mt-1">{title}</h1>
-          <h2 className="text-xs text-foreground/90">With: {author}</h2>
+      <div className='p-3 flex-grow flex flex-col justify-between !duration-300 bg-accent/25 group-hover:bg-accent/50'>
+        <div className='flex flex-col'>
+          <h1 className='font-regular text-lg mt-1'>{title}</h1>
+          <p className='line-clamp-2'>
+            {description.length > 100
+              ? `${description.substring(0, 100)}...`
+              : description}
+          </p>
+          <h2 className='text-xs text-foreground/90'>With: {author}</h2>
         </div>
 
-        <div className="flex items-center mt-4 gap-2">
+        <div className='flex items-center mt-4 gap-2'>
           <Link
             href={`/courses/${id}`}
             className={cn(
@@ -76,21 +81,21 @@ const CourseCard = ({
           </Link>
           {progress !== null ? (
             <>
-              <div className="flex-1 h-1 rounded-sm bg-[#11DD7B]/20">
+              <div className='flex-1 h-1 rounded-sm bg-[#11DD7B]/20'>
                 <div
                   className={`h-full bg-[#11DD7B] rounded-sm`}
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
-              <p className="text-muted-foreground">{Math.round(progress)}%</p>
+              <p className='text-muted-foreground'>{Math.round(progress)}%</p>
             </>
           ) : (
-            <div className="flex flex-col ml-auto gap-1 text-right">
-              <p className="text-muted-foreground font-light text-sm flex gap-0">
+            <div className='flex flex-col ml-auto gap-1 text-right'>
+              <p className='text-muted-foreground font-light text-sm flex gap-0'>
                 <BiMoneyWithdraw className={"h-5 w-5 mr-1"} />
                 {price === 0 ? "FREE" : `K${price}`}
               </p>
-              <p className="text-muted-foreground font-light text-sm flex">
+              <p className='text-muted-foreground font-light text-sm flex'>
                 <Video className={"h-5 w-5 mr-1"} />
                 {chaptersLength} {chaptersLength === 1 ? "Chapter" : "Chapters"}
               </p>

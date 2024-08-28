@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import LogOutButton from "./LogOutButton";
+import { MdStars } from "react-icons/md";
 
 const NavbarRoutes = async () => {
   const { userId } = auth();
@@ -17,14 +18,23 @@ const NavbarRoutes = async () => {
   return (
     <div className='flex gap-x-2 ml-auto items-center justify-end w-full'>
       <NavbarRoutesClient />
-      <div className='flex items-center justify-center rounded-sm py-2 px-2 pl-2'>
-        <div className='flex items-center gap-1 pr-2 text-sm text-primary font-medium'>
-          <Star className='text-primary w-4 h-4 fill-[#11DD7B]' />
-          {xp} <p>Points</p>
+      <div className='flex items-center justify-center rounded-none py-2 px-2 pl-2'>
+        <div className='flex items-center gap-1 pr-2 text-sm text-[#2A2B2E]'>
+          <MdStars className='w-5 h-5 text-green-700 animate-pulse' />
+          <div className='flex items-center justify-center gap-1'>
+            {xp} <p>Points</p>
+          </div>
         </div>
-        <div className='bg-primary bg-sm py-1 px-2 flex items-center gap-2 pl-2'>
-          <span className='text-sm text-white font-medium'>{userName}</span>
-          <UserButton afterSignOutUrl='/' />
+        <div className='bg-[#2A2B2E] py-2 px-4 flex items-center gap-2 rounded-full'>
+          <span className='text-sm text-white font-bold'>{userName}</span>
+          <UserButton
+            afterSignOutUrl='/'
+            appearance={{
+              elements: {
+                avatarBox: "w-6 h-6 ring-2 ring-[#FFEEEB]",
+              },
+            }}
+          />
         </div>
       </div>
     </div>

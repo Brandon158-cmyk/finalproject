@@ -7,6 +7,7 @@ type CourseWithProgressWithCategory = Course & {
   category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
+  enrollmentCount: number;
 };
 
 type GetCourse = {
@@ -44,6 +45,11 @@ export const getCourses = async ({ userId, title, categoryId }: GetCourse) => {
             userId,
           },
         },
+        _count: {
+          select: {
+            purchases: true,
+          },
+        },
       },
       orderBy: {
         createdAt: "desc",
@@ -57,6 +63,7 @@ export const getCourses = async ({ userId, title, categoryId }: GetCourse) => {
             return {
               ...course,
               progress: null,
+              enrollmentCount: course._count.purchases,
             };
           }
 
@@ -65,6 +72,7 @@ export const getCourses = async ({ userId, title, categoryId }: GetCourse) => {
           return {
             ...course,
             progress: progressPrecentage,
+            enrollmentCount: course._count.purchases,
           };
         })
       );
