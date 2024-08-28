@@ -20,32 +20,37 @@ const Dashboard = async () => {
   const xp = user.publicMetadata.xp || 0;
 
   return (
-    <div className="p-6 space-y-4 container">
-      <div className="bg-white border rounded-sm overflow-hidden">
+    <div className='p-6 space-y-4 container'>
+      <div className='bg-white border rounded-sm overflow-hidden'>
         <UserCard />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 p-4'>
           <InfoCard
             icon={Clock}
-            label="In Progress"
+            label='In Progress'
             numberOfItems={coursesInProgress.length}
             nameOfItems={"Courses"}
           />
           <InfoCard
             icon={CheckCircle}
-            label="Completed"
+            label='Completed'
             numberOfItems={completedCourses.length}
             nameOfItems={"Courses"}
           />
           <InfoCard
             icon={Star}
-            label="Points"
+            label='Points'
             numberOfItems={xp}
             nameOfItems={"XP"}
           />
         </div>
       </div>
-      <div className="bg-secondary border rounded-sm overflow-hidden p-5">
-        <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+      <div className='bg-secondary border rounded-sm overflow-hidden p-5'>
+        <CoursesList
+          items={[...coursesInProgress, ...completedCourses].map((course) => ({
+            ...course,
+            enrollmentCount: 0, // or fetch the actual count if available
+          }))}
+        />
       </div>
     </div>
   );

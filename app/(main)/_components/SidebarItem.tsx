@@ -28,26 +28,26 @@ const SidebarItem = ({
     <Button
       asChild
       variant={"ghost"}
-      size={"lg"}
+      size={"default"}
       className={cn(
-        "bg-white/10 flex items-center justify-start gap-x-3 px-4 py-[26px] text-white text-sm mx-3 !rounded-sm overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
+        "bg-transparent flex items-center justify-start gap-x-2 px-6 py-2 text-[#2A2B2E] text-sm mx-1 !rounded-full overflow-hidden transition-all duration-300 rounded-full hover:scale-1 group",
         isActive
-          ? "bg-[#11DD7B] text-primary opacity-100 hover:bg-white hover:text-primary"
+          ? "bg-slate-200 font-bold text-[#2A2B2E] opacity-100 hover:bg-white hover:text-[#2A2B2E]"
           : ""
       )}
     >
       <Link href={href}>
         <span
           className={cn(
-            "p-[6px] rounded-[6px] transition-all duration-300",
+            "p-[3px] rounded-none transition-all duration-300",
             isActive
-              ? "bg-white group-hover:bg-primary/5 text-primary"
-              : "bg-white text-primary group-hover:text-foreground"
+              ? "bg-transparent group-hover:bg-[#FFEEEB]/5 text-[#2A2B2E]"
+              : "bg-transparent text-neutral-400 group-hover:text-foreground"
           )}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className='w-5 h-5' />
         </span>
-        {label}
+        {!isCollapsed && label}
       </Link>
     </Button>
   );

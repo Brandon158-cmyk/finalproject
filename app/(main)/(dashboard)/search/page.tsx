@@ -7,6 +7,7 @@ import Categories from "./_components/Categories";
 import SearchInput from "@/components/SearchInput";
 import { redirect } from "next/navigation";
 import CoursesList from "@/components/Course/CoursesList";
+import Banner from "./_components/Banner";
 
 export const revalidate = 0;
 
@@ -35,13 +36,14 @@ const Searchpage = async ({ searchParams }: SearchPageProps) => {
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0">
+      <div className='px-6 pt-6 md:hidden md:mb-0'>
         <SearchInput />
       </div>
-      <div className="p-6 space-y-4 w-screen md:w-full">
+      <div className='p-6 space-y-4 w-screen md:w-full'>
         <Categories items={categories} />
       </div>
-      <div className="w-full h-full mx-auto container">
+      <Banner />
+      <div className='w-full h-full mx-auto container'>
         <Suspense fallback={<div>Loading...</div>}>
           <CoursesList items={courses} />
         </Suspense>

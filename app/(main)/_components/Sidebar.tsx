@@ -20,26 +20,26 @@ const Sidebar = () => {
   return (
     <div
       className={cn(
-        "h-full flex flex-col overflow-y-auto bg-primary md:bg-primary border-r-2 border-white transition-all duration-300",
-        isCollapsed ? "w-[80px]" : "w-[250px]"
+        "h-full flex flex-col overflow-y-auto bg-white md:bg-white transition-all duration-300 border-r border-gray-300 px-2",
+        isCollapsed ? "w-[70px]" : "w-[200px]"
       )}
     >
       {/* Toggle Button */}
-      <div className="flex p-4 justify-between items-center">
+      <div className='flex p-4 justify-between items-center'>
         {!isCollapsed && (
-          <h1 className="font-bold w-auto h-8 flex items-center justify-center gap-3">
-            <div className="!h-8 p-1 !w-8 !aspect-square bg-[#11DD7B] rounded-sm text-lg lg:text-xl flex items-center justify-center !text-primary">
+          <h1 className='font-bold w-auto h-8 flex items-center justify-center gap-3'>
+            <div className='!h-8 p-1 !w-8 !aspect-square bg-[#2A2B2E] rounded-full text-md lg:text-lg flex items-center justify-center !text-white'>
               P
             </div>
-            <div className="flex text-white text-lg md:text-xl items-center gap-1">
-              <span>Punzila</span>
+            <div className='flex text-[#2A2B2E] text-md md:text-lg items-center gap-1'>
+              Punzila
             </div>
           </h1>
         )}
         <Button
           variant={"default"}
           size={"icon"}
-          className="text-white hidden md:flex bg-primary ml-auto"
+          className='text-[#2A2B2E] hidden md:flex bg-transparent ml-auto hover:bg-[#FFEEEB] hover:text-[#2A2B2E] text-sm rounded-full'
           onClick={toggleSidebar}
         >
           {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
@@ -50,28 +50,28 @@ const Sidebar = () => {
       <SidebarRoutes isCollapsed={isCollapsed} />
 
       {/* Settings Button */}
-      <div className="flex flex-col justify-center items-center mt-auto mb-2 mx-3">
+      <div className='flex flex-col justify-center items-center mt-auto mb-2'>
         <Button
           asChild
           variant={"ghost"}
-          size={"lg"}
+          size={"default"}
           className={cn(
-            "bg-white/10 flex items-center justify-start w-full gap-x-3 px-4 py-[26px] text-white text-sm mx-3 !rounded-sm overflow-hidden font-[500] transition-all duration-300 rounded-none hover:scale-1 group",
+            "bg-transparent flex items-center justify-start gap-x-2 px-4 py-3 text-[#2A2B2E] text-sm mx-1 !rounded-full overflow-hidden transition-all duration-300 rounded-full hover:scale-1 group w-full",
             isActive
-              ? "bg-[#11DD7B] text-primary opacity-100 hover:bg-white hover:text-primary"
+              ? "bg-[#FFEEEB] font-bold text-[#2A2B2E] opacity-100 hover:bg-white hover:text-[#2A2B2E]"
               : ""
           )}
         >
           <Link href={"/settings"}>
             <span
               className={cn(
-                "p-[6px] rounded-[6px] transition-all duration-300",
+                "p-[3px] rounded-none transition-all duration-300",
                 isActive
-                  ? "bg-white group-hover:bg-primary/5 text-primary"
-                  : "bg-white text-primary group-hover:text-foreground"
+                  ? "bg-transparent group-hover:bg-[#FFEEEB]/5 text-[#2A2B2E]"
+                  : "bg-transparent text-neutral-400 group-hover:text-foreground"
               )}
             >
-              <Settings className="w-5 h-5" />
+              <Settings className='w-5 h-5' />
             </span>
             {!isCollapsed && "Settings"}
           </Link>
