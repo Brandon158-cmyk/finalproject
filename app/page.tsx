@@ -34,13 +34,13 @@ const Page = async () => {
               </p>
               <div className="flex space-x-4 mt-6">
                 <Link
-                  href="/teacher/courses"
+                  href="/search"
                   className="bg-sky-400 text-[#2A2B2E] border border-[#2A2B2E]/50 px-6 py-2 text-sm rounded-full hover:bg-sky-600 transition duration-300"
                 >
                   Explore Courses
                 </Link>
                 <Link
-                  href="#"
+                  href="/dashboard"
                   className="bg-green-200 text-[#2A2B2E] border border-[#2A2B2E]/50 text-sm px-6 py-2 rounded-full hover:bg-green-400 transition duration-300"
                 >
                   Dashboard

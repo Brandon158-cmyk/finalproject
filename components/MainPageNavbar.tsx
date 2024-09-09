@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   return (
@@ -19,15 +17,15 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-x-8 ml-auto justify-end">
           <div className="flex gap-x-4 items-center text-md">
-            <Link href="/teacher/courses">Courses</Link>
-            <Link href="/teacher/courses">Dashboard</Link>
-            <Link href="/teacher/courses">Leader Boards</Link>
-            <Link href="/teacher/courses">About</Link>
+            <Link href="/search">Courses</Link>
+            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/rankings">Leader Boards</Link>
+            <Link href="/about">About</Link>
             <Link href="/teacher/courses">Become A Teacher</Link>
           </div>
           <div>
             <Link
-              href="/teacher/courses"
+              href="/sign-in"
               className="bg-pink-400 text-[#2A2B2E] border border-[#2A2B2E]/50 px-6 py-2 text-sm rounded-full hover:bg-pink-600 transition duration-300"
             >
               Sign In
