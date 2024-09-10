@@ -35,16 +35,10 @@ const Chart = ({ data }: ChartProps) => {
             bottom: 5,
           }}
         >
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey="name" fontSize={12} />
-          <YAxis tickFormatter={(value) => `TRY ${value}`} fontSize={12}/>
-          {/* <Tooltip />
-          <Legend /> */}
-          <Bar
-            dataKey="total"
-            fill="#82ca9d"
-            radius={[4,4,0,0]}
-          />
+          <YAxis tickFormatter={(value) => `ZMW ${value}`} fontSize={12} />
+
+          <Bar dataKey="total" fill="#82ca9d" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </Card>
