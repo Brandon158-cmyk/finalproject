@@ -1,6 +1,6 @@
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import CoursesList from "@/components/Course/CoursesList";
-import { auth, clerkClient } from "@clerk/nextjs";
+import { UserButton, auth, clerkClient } from "@clerk/nextjs";
 import { CheckCircle, Clock, Star } from "lucide-react";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -14,37 +14,36 @@ const Dashboard = async () => {
   }
   const user = await clerkClient.users.getUser(userId);
 
-  const { completedCourses, coursesInProgress } = await getDashboardCourses(
-    userId
-  );
+  const { completedCourses, coursesInProgress } =
+    await getDashboardCourses(userId);
   const xp = user.publicMetadata.xp || 0;
 
   return (
-    <div className='p-6 space-y-4 container'>
-      <div className='bg-white border rounded-sm overflow-hidden'>
+    <div className="p-6 space-y-4 container">
+      <div className="bg-[#2A2B2E] border rounded-xl overflow-hidden">
         <UserCard />
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 p-4'>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">
           <InfoCard
             icon={Clock}
-            label='In Progress'
+            label="In Progress"
             numberOfItems={coursesInProgress.length}
             nameOfItems={"Courses"}
           />
           <InfoCard
             icon={CheckCircle}
-            label='Completed'
+            label="Completed"
             numberOfItems={completedCourses.length}
             nameOfItems={"Courses"}
           />
           <InfoCard
             icon={Star}
-            label='Points'
+            label="Points"
             numberOfItems={xp}
             nameOfItems={"XP"}
           />
         </div>
       </div>
-      <div className='bg-secondary border rounded-sm overflow-hidden p-5'>
+      <div className="bg-secondary border rounded-xl overflow-hidden p-5">
         <CoursesList
           items={[...coursesInProgress, ...completedCourses].map((course) => ({
             ...course,

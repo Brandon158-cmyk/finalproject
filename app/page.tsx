@@ -25,7 +25,7 @@ const Page = async () => {
             <div className="max-w-[50%]">
               <h2 className="text-6xl font-bold mb-4">
                 Are You Ready To <span className="text-pink-500">Elevate</span>{" "}
-                Your <span className="text-sky-700">Learning</span> Experience
+                Your <span className="text-sky-700">Learning</span> Experience?
               </h2>
               <p className="text-gray-600 text-sm mb-4">
                 Access your courses anytime, anywhere with our mobile-friendly
