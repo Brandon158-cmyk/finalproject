@@ -8,7 +8,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
-    const { isPublished, ...values } = await req.json();
+    const { isPublished, textContent, ...values } = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -32,6 +32,7 @@ export async function PATCH(
       },
       data: {
         ...values,
+        textContent, // Include textContent in the update operation
       },
     });
 
@@ -102,6 +103,57 @@ export async function DELETE(
     return NextResponse.json(deletedChapter);
   } catch (error) {
     console.log("[COURSES_CHAPTER_ID_DELETE]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
+
+export async function POST(
+  req: Request,
+  { params }: { params: { courseId: string } }
+) {
+  try {
+    const { userId } = auth();
+    const { title, chapterType } = await req.json();
+
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const courseOwner = await db.course.findUnique({
+      where: {
+        id: params.courseId,
+        userId: userId,
+      },
+    });
+
+    if (!courseOwner) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const lastChapter = await db.chapter.findFirst({
+      where: {
+        courseId: params.courseId,
+      },
+      orderBy: {
+        position: "desc",
+      },
+    });
+
+    const newPosition = lastChapter ? lastChapter.position + 1 : 1;
+
+    const chapter = await db.chapter.create({
+      data: {
+        title,
+        courseId: params.courseId,
+        position: newPosition,
+        // Initialize the appropriate field based on chapterType
+        ...(chapterType === "video" ? { videoUrl: "" } : { textContent: "" }),
+      },
+    });
+
+    return NextResponse.json(chapter);
+  } catch (error) {
+    console.log("[CHAPTERS]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

@@ -34,6 +34,7 @@ const formSchema = z.object({
 const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [chapterType, setChapterType] = useState<"video" | "text">("video");
   const router = useRouter();
   const toggleCreating = () => {
     setIsCreating((current) => !current);
@@ -49,8 +50,10 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values);
-      await axios.post(`/api/courses/${courseId}/chapters`, values);
+      await axios.post(`/api/courses/${courseId}/chapters`, {
+        ...values,
+        chapterType,
+      });
       toast.success("Chapter Created!");
       toggleCreating();
       router.refresh();
@@ -130,17 +133,33 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
                 </FormItem>
               )}
             ></FormField>
-            <div className="flex items-center gap-x-2">
-              <Button
-                className="rounded-sm"
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                {!isValid ||
-                  (isSubmitting && <BiLoader className="mr-1 animate-spin" />)}
-                Create
-              </Button>
+            <div className="flex items-center space-x-4">
+              <label>
+                <input
+                  type="radio"
+                  value="video"
+                  checked={chapterType === "video"}
+                  onChange={() => setChapterType("video")}
+                />
+                Video Chapter
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="text"
+                  checked={chapterType === "text"}
+                  onChange={() => setChapterType("text")}
+                />
+                Text Chapter
+              </label>
             </div>
+            <Button
+              className="rounded-sm"
+              disabled={!isValid || isSubmitting}
+              type="submit"
+            >
+              Create
+            </Button>
           </form>
         </Form>
       ) : (
