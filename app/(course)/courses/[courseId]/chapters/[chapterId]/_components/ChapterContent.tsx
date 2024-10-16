@@ -11,23 +11,27 @@ import { useMemo, useState } from "react";
 import { FaLock } from "react-icons/fa6";
 import { toast } from "sonner";
 
-interface VideoPlayerProps {
+interface ChapterContentProps {
   url: string;
   isLocked: boolean;
   nextChapterId?: string;
   chapterId: string;
   courseId: string;
   completeOnEnd: boolean;
+  chapterType: "video" | "text";
+  textContent?: string;
 }
 
-const VideoPlayer = ({
+const ChapterContent = ({
   url,
   isLocked,
   nextChapterId,
   chapterId,
   courseId,
   completeOnEnd,
-}: VideoPlayerProps) => {
+  chapterType,
+  textContent,
+}: ChapterContentProps) => {
   const ReactPlayer = useMemo(
     () => dynamic(() => import("react-player/lazy"), { ssr: false }),
     []
@@ -73,7 +77,7 @@ const VideoPlayer = ({
 
   return (
     <div className="relative h-full w-full flex items-center justify-center !aspect-video">
-      {!isReady && !isLocked && (
+      {!isReady && !isLocked && chapterType === "video" && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary w-full gap-2 !aspect-video rounded-sm border">
           <Loader2 className="h-6 w-6 animate-spin text-white" />
           Loading
@@ -85,7 +89,7 @@ const VideoPlayer = ({
           <p className="text-sm">This Chapter is locked</p>
         </div>
       )}
-      {!isLocked && (
+      {!isLocked && chapterType === "video" && (
         <ReactPlayer
           url={url.includes("youtube.com") ? `${url}?rel=0` : url}
           width={"100%"}
@@ -102,4 +106,4 @@ const VideoPlayer = ({
   );
 };
 
-export default VideoPlayer;
+export default ChapterContent;

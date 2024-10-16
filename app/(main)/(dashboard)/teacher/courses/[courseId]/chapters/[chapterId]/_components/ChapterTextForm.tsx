@@ -14,12 +14,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Chapter } from "@prisma/client";
 import { BiSolidBookContent } from "react-icons/bi";
 import { RiFileTextLine } from "react-icons/ri";
+import Editor from "@/components/Editor";
 
 interface ChapterTextFormProps {
   initialData: Chapter;
@@ -101,12 +101,7 @@ const ChapterTextForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      placeholder="Enter your chapter content here..."
-                      {...field}
-                      rows={10}
-                    />
+                    <Editor {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
