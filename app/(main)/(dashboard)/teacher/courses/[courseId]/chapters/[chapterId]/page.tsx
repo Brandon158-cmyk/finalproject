@@ -45,6 +45,8 @@ const page = async ({
   const completionText = `(${completedFields}/${totalFields})`;
   const isComplete = requiredFields.every(Boolean);
 
+  console.log("chapterType in API route", chapter.chapterType);
+
   return (
     <>
       {!chapter.isPublished && (
@@ -114,10 +116,12 @@ const page = async ({
                 <BiSolidBookContent className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
               )}
               <h2 className="text-xl">
-                {chapter.videoUrl ? "Video Content" : "Text Content"}
+                {chapter.chapterType === "video"
+                  ? "Video Content"
+                  : "Text Content"}
               </h2>
             </div>
-            {chapter.videoUrl ? (
+            {chapter.chapterType === "video" ? (
               <ChapterVideoForm
                 initialData={chapter}
                 chapterId={params.chapterId}

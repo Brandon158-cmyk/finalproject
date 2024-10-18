@@ -146,7 +146,7 @@ export async function POST(
         title,
         courseId: params.courseId,
         position: newPosition,
-        // Initialize the appropriate field based on chapterType
+        chapterType,
         ...(chapterType === "video" ? { videoUrl: "" } : { textContent: "" }),
       },
     });

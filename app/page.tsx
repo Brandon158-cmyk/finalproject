@@ -1,26 +1,27 @@
 import React from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
-import { clerkClient } from "@clerk/nextjs";
-import Marquee from "react-fast-marquee";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "../components/MainPageNavbar";
 import MainBg from "../assets/images/online.jpg";
-import Banner from "./(main)/(dashboard)/search/_components/Banner";
+
+export const dynamic = "force-dynamic";
 
 const Page = async () => {
   const { userId } = auth();
-  const userCount = await clerkClient.users.getCount();
+
+  if (userId) {
+    redirect("/search");
+  }
+
   return (
-    <div className="flex flex-col min-h-screen gap-8 bg-white ">
+    <div className="flex flex-col min-h-screen gap-8 bg-white">
       <div>
         <Navbar />
       </div>
       <div className="mt-2 px-2 mb-6">
         <div className="w-full text-[#2A2B2E] p-6 max-w-screen-xl mx-auto rounded-xl flex justify-between overflow-hidden relative h-[700px]">
-          {" "}
           <div className="flex items-center justify-between z-10 pr-8 h-full">
             <div className="max-w-[50%]">
               <h2 className="text-6xl font-bold mb-4">
@@ -49,7 +50,6 @@ const Page = async () => {
             </div>
           </div>
           <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[55%] h-full">
-            {" "}
             <Image
               src={MainBg}
               alt="Product Manager illustration"

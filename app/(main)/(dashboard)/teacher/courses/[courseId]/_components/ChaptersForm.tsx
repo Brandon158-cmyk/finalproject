@@ -34,7 +34,8 @@ const formSchema = z.object({
 const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [chapterType, setChapterType] = useState<"video" | "text">("video");
+  const [chapterType, setChapterType] = useState<String>("video");
+  console.log("chapterType", chapterType);
   const router = useRouter();
   const toggleCreating = () => {
     setIsCreating((current) => !current);
@@ -52,7 +53,7 @@ const ChaptersForm = ({ initialData, courseId }: ChapterFormProps) => {
     try {
       await axios.post(`/api/courses/${courseId}/chapters`, {
         ...values,
-        chapterType,
+        chapterType: chapterType,
       });
       toast.success("Chapter Created!");
       toggleCreating();
