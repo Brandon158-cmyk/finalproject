@@ -52,8 +52,8 @@ const page = async ({ params }: ChapterProps) => {
       )}
 
       <div className="flex flex-col mx-auto !pb-10">
-        <div className="pb-4 md:pb-6 w-full">
-          {chapter.videoUrl && (
+        {chapter.videoUrl && (
+          <div className="pb-4 md:pb-6 w-full">
             <ChapterContent
               url={chapter.videoUrl}
               isLocked={isLocked}
@@ -64,8 +64,8 @@ const page = async ({ params }: ChapterProps) => {
               chapterType={chapter.videoUrl ? "video" : "text"}
               textContent={chapter.textContent || undefined}
             />
-          )}
-        </div>
+          </div>
+        )}
         <div className="py-4 flex flex-col">
           <div className="flex flex-col md:flex-row items-center justify-between mb-2 px-0 md:px-4 gap-2">
             <h2 className="text-2xl font-semibold">{chapter.title}</h2>
