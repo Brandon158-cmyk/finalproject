@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { MdOutlineCancel } from "react-icons/md";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   Form,
   FormControl,
@@ -14,34 +14,28 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { BiLoader } from "react-icons/bi";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Chapter } from "@prisma/client";
-import { BiSolidVideoPlus } from "react-icons/bi";
-import { RiVideoUploadLine } from "react-icons/ri";
-import { CldUploadWidget } from "next-cloudinary";
-import dynamic from "next/dynamic";
+import { BiSolidBookContent } from "react-icons/bi";
+import { RiFileTextLine } from "react-icons/ri";
+import Editor from "@/components/Editor";
 
-interface ChapterVideoFormProps {
+interface ChapterTextFormProps {
   initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
 
 const formSchema = z.object({
-  videoUrl: z.string().min(1, "Video is required"),
+  textContent: z.string().min(1),
 });
 
-const ChapterVideoForm = ({
+const ChapterTextForm = ({
   initialData,
   courseId,
   chapterId,
-}: ChapterVideoFormProps) => {
-  const ReactPlayer = useMemo(
-    () => dynamic(() => import("react-player"), { ssr: false }),
-    []
-  );
+}: ChapterTextFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const toggleEdit = () => setIsEditing((current) => !current);
   const router = useRouter();
@@ -49,12 +43,11 @@ const ChapterVideoForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      videoUrl: initialData?.videoUrl || "",
+      textContent: initialData?.textContent || "",
     },
   });
 
   const { isSubmitting, isValid } = form.formState;
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(
@@ -69,18 +62,11 @@ const ChapterVideoForm = ({
     }
   };
 
-  const handleUpload = (result: any) => {
-    const videoUrl = result.info.secure_url;
-    form.setValue("videoUrl", videoUrl);
-    onSubmit({ videoUrl });
-  };
-
   return (
     <div className="border bg-accent/50 dark:bg-accent/20 rounded-lg p-4">
       <div className="font-medium text-lg flex items-center justify-between">
         <span className="flex items-center justify-center gap-2 text-xl">
-          {isSubmitting && <BiLoader className="animate-spin w-5 h-5" />}
-          Chapter Video
+          Chapter Content
         </span>
         <Button variant={"ghost"} onClick={toggleEdit} disabled={isSubmitting}>
           {isEditing && (
@@ -89,51 +75,57 @@ const ChapterVideoForm = ({
               Cancel
             </>
           )}
-          {!isEditing && !initialData.videoUrl && (
+          {!isEditing && !initialData.textContent && (
             <>
-              <BiSolidVideoPlus className="h-4 w-4 mr-2" />
-              Add Video
+              <BiSolidBookContent className="h-4 w-4 mr-2" />
+              Add Content
             </>
           )}
-          {!isEditing && initialData.videoUrl && (
+          {!isEditing && initialData.textContent && (
             <>
-              <RiVideoUploadLine className="h-4 w-4 mr-2" />
-              Change Video
+              <RiFileTextLine className="h-4 w-4 mr-2" />
+              Edit Content
             </>
           )}
         </Button>
       </div>
       {isEditing && (
-        <div className="mt-4">
-          <CldUploadWidget
-            uploadPreset="ml_default"
-            onUpload={handleUpload}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 mt-3"
           >
-            {({ open }) => (
-              <Button onClick={() => open()} type="button">
-                Upload Video
+            <FormField
+              control={form.control}
+              name="textContent"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Editor {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-x-2">
+              <Button
+                disabled={!isValid || isSubmitting}
+                type="submit"
+                variant="default"
+              >
+                Save
               </Button>
-            )}
-          </CldUploadWidget>
-        </div>
+            </div>
+          </form>
+        </Form>
       )}
-      {!isEditing && initialData.videoUrl && (
-        <div className="relative aspect-video mt-2">
-          <ReactPlayer
-            url={initialData.videoUrl}
-            controls
-            width="100%"
-            height="100%"
-          />
-        </div>
-      )}
-      {!isEditing && !initialData.videoUrl && (
-        <div className="text-sm text-muted-foreground mt-2">
-          No video uploaded
+      {!isEditing && initialData.textContent && (
+        <div className="mt-2">
+          <p>{initialData.textContent}</p>
         </div>
       )}
     </div>
   );
 };
 
-export default ChapterVideoForm;
+export default ChapterTextForm;

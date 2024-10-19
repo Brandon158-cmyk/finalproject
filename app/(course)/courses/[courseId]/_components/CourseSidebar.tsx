@@ -70,6 +70,7 @@ const CourseSidebar = async ({ course, progressCount }: CourseSidebarProps) => {
             isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
             courseId={course.id}
             isLocked={!chapter.isFree && !purchase}
+            chapterType={chapter.videoUrl ? "Video" : "text"}
           />
         ))}
       </div>

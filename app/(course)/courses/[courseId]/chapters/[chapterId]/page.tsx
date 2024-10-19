@@ -1,5 +1,5 @@
 import React from "react";
-import VideoPlayer from "./_components/VideoPlayer";
+import VideoPlayer from "./_components/ChapterContent";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
 import { getChapter } from "@/actions/get-chapter";
@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { FaCheck } from "react-icons/fa6";
 import CourseEnrollButton from "./_components/CourseEnrollButton";
 import CourseProgressButton from "./_components/CourseProgressButton";
+import ChapterContent from "./_components/ChapterContent";
+import { MdOutlineExpandCircleDown } from "react-icons/md";
+import { BiSolidBookContent } from "react-icons/bi";
 
 interface ChapterProps {
   params: {
@@ -49,16 +52,20 @@ const page = async ({ params }: ChapterProps) => {
       )}
 
       <div className="flex flex-col mx-auto !pb-10">
-        <div className="pb-4 md:pb-6 w-full">
-          <VideoPlayer
-            url={chapter.videoUrl || ""}
-            isLocked={isLocked}
-            nextChapterId={nextChapter?.id}
-            chapterId={params.chapterId}
-            completeOnEnd={completeOnEnd}
-            courseId={params.courseId}
-          />
-        </div>
+        {chapter.videoUrl && (
+          <div className="pb-4 md:pb-6 w-full">
+            <ChapterContent
+              url={chapter.videoUrl}
+              isLocked={isLocked}
+              nextChapterId={nextChapter?.id}
+              chapterId={params.chapterId}
+              completeOnEnd={completeOnEnd}
+              courseId={params.courseId}
+              chapterType={chapter.videoUrl ? "video" : "text"}
+              textContent={chapter.textContent || undefined}
+            />
+          </div>
+        )}
         <div className="py-4 flex flex-col">
           <div className="flex flex-col md:flex-row items-center justify-between mb-2 px-0 md:px-4 gap-2">
             <h2 className="text-2xl font-semibold">{chapter.title}</h2>
@@ -77,6 +84,15 @@ const page = async ({ params }: ChapterProps) => {
             )}
           </div>
           <Preview value={chapter.description!} />
+          {!!chapter.textContent && (
+            <div className="text-sm text-slate-700 mt-4">
+              <h3 className="text-lg font-semibold mb-2 flex items-center gap-x-2">
+                <BiSolidBookContent className="h-4 w-4" />
+                Course Content
+              </h3>
+              <Preview value={chapter.textContent} />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ interface CourseSidebarItemProps {
   isCompleted: boolean;
   courseId: string;
   isLocked: boolean;
+  chapterType: "Video" | "text";
 }
 
 const CourseSidebarItem = ({
@@ -25,6 +26,7 @@ const CourseSidebarItem = ({
   isCompleted,
   courseId,
   isLocked,
+  chapterType,
 }: CourseSidebarItemProps) => {
   const pathname = usePathname();
   const router = useRouter();

@@ -12,8 +12,14 @@ import ChapterDescriptionForm from "./_components/ChapterDescriptionForm";
 import ChapterAccessFormForm from "./_components/ChapterAccessForm";
 import ChapterVideoForm from "./_components/ChapterVideoForm";
 import ChapterActions from "./_components/ChapterActions";
+import ChapterTextForm from "./_components/ChapterTextForm";
+import { BiSolidBookContent } from "react-icons/bi";
 
-const page = async ({params}: {params: { courseId: string; chapterId: string };}) => {
+const page = async ({
+  params,
+}: {
+  params: { courseId: string; chapterId: string };
+}) => {
   const { userId } = auth();
   if (!userId) {
     return redirect("/");
@@ -29,11 +35,17 @@ const page = async ({params}: {params: { courseId: string; chapterId: string };}
     return redirect("/");
   }
 
-  const requiredFields = [chapter.title, chapter.description, chapter.videoUrl];
+  const requiredFields = [
+    chapter.title,
+    chapter.description,
+    chapter.videoUrl || chapter.textContent,
+  ];
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
   const completionText = `(${completedFields}/${totalFields})`;
   const isComplete = requiredFields.every(Boolean);
+
+  console.log("chapterType in API route", chapter.chapterType);
 
   return (
     <>
@@ -82,10 +94,10 @@ const page = async ({params}: {params: { courseId: string; chapterId: string };}
               chapterId={params.chapterId}
             />
             <ChapterDescriptionForm
-                initialData={chapter}
-                courseId={params.courseId}
-                chapterId={params.chapterId}
-              />
+              initialData={chapter}
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+            />
           </div>
           <div className="space-y-4">
             <div className="flex items-center gap-x-2">
@@ -93,19 +105,35 @@ const page = async ({params}: {params: { courseId: string; chapterId: string };}
               <h2 className="text-xl">Access Settings</h2>
             </div>
             <ChapterAccessFormForm
-                initialData={chapter}
-                courseId={params.courseId}
-                chapterId={params.chapterId}
-              />
-            <div className="flex items-center gap-x-2">
-              <FaVideo className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
-              <h2 className="text-xl">Add video</h2>
-            </div>
-            <ChapterVideoForm
               initialData={chapter}
-              chapterId={params.chapterId}
               courseId={params.courseId}
+              chapterId={params.chapterId}
             />
+            <div className="flex items-center gap-x-2">
+              {chapter.videoUrl ? (
+                <FaVideo className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
+              ) : (
+                <BiSolidBookContent className="w-8 h-8 p-2 bg-accent rounded-lg text-primary" />
+              )}
+              <h2 className="text-xl">
+                {chapter.chapterType === "video"
+                  ? "Video Content"
+                  : "Text Content"}
+              </h2>
+            </div>
+            {chapter.chapterType === "video" ? (
+              <ChapterVideoForm
+                initialData={chapter}
+                chapterId={params.chapterId}
+                courseId={params.courseId}
+              />
+            ) : (
+              <ChapterTextForm
+                initialData={chapter}
+                chapterId={params.chapterId}
+                courseId={params.courseId}
+              />
+            )}
           </div>
         </div>
       </div>
