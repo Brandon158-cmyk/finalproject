@@ -33,10 +33,10 @@ model Course {
 }
 
 model Category {
-  id String @id @default(uuid()) @map("_id") 
-  name String @unique
-
+  id      String    @id @default(uuid()) @map("_id")
+  name    String    @unique
   courses Course[]
+  quizzes Quiz[]
 }
 
 model Chapter {
@@ -115,4 +115,33 @@ model RevenueShare {
 
   @@index([instructorId])
   @@index([courseId])
+}
+
+model QuizSession {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  categoryId  String
+  difficulty  String
+  score       Int
+  totalQuestions Int
+  completedAt DateTime?
+  createdAt   DateTime    @default(now())
+
+  @@index([userId])
+}
+
+model Quiz {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  categoryId  String
+  difficulty  String
+  score       Int
+  completed   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  category    Category    @relation(fields: [categoryId], references: [id])
+  
+  @@index([userId])
+  @@index([categoryId])
 }
