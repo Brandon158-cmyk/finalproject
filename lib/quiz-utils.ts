@@ -9,13 +9,14 @@ export const determineQuizDifficulty = (userLevel: number): QuizDifficulty => {
 
 export const getQuizReward = (
   difficulty: QuizDifficulty,
-  score: number
+  correctAnswers: number
 ): number => {
-  const baseReward = {
-    beginner: 10,
-    intermediate: 20,
-    advanced: 30,
+  const baseXPPerQuestion = 5; // 5 XP per correct answer
+  const difficultyMultiplier = {
+    beginner: 1,
+    intermediate: 1.5,
+    advanced: 2,
   }[difficulty];
 
-  return Math.floor(baseReward * (score / 100));
+  return Math.floor(baseXPPerQuestion * correctAnswers * difficultyMultiplier);
 };
