@@ -14,8 +14,9 @@ const Dashboard = async () => {
   }
   const user = await clerkClient.users.getUser(userId);
 
-  const { completedCourses, coursesInProgress } =
-    await getDashboardCourses(userId);
+  const { completedCourses, coursesInProgress } = await getDashboardCourses(
+    userId
+  );
   const xp = user.publicMetadata.xp || 0;
 
   return (
@@ -47,7 +48,7 @@ const Dashboard = async () => {
         <CoursesList
           items={[...coursesInProgress, ...completedCourses].map((course) => ({
             ...course,
-            enrollmentCount: 0, // or fetch the actual count if available
+            enrollmentCount: 0,
           }))}
         />
       </div>

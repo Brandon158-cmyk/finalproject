@@ -2,7 +2,7 @@ import React from "react";
 import VideoPlayer from "./_components/ChapterContent";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
-import { getChapter } from "@/actions/get-chapter";
+import { db } from "@/lib/db";
 import { Banner } from "@/components/ui/banner";
 import Preview from "@/components/Preview";
 import { Button } from "@/components/ui/button";
@@ -20,24 +20,70 @@ interface ChapterProps {
   };
 }
 
-const page = async ({ params }: ChapterProps) => {
+const ChapterIdPage = async ({ params }: ChapterProps) => {
   const { userId } = auth();
+
   if (!userId) {
     return redirect("/");
   }
 
-  const { chapter, course, nextChapter, userProgress, purchase } =
-    await getChapter({
-      userId,
-      chapterId: params.chapterId,
-      courseId: params.courseId,
-    });
-  if (!chapter || !course) {
+  const chapter = await db.chapter.findUnique({
+    where: {
+      id: params.chapterId,
+    },
+  });
+
+  if (!chapter) {
     return redirect("/");
   }
 
-  const isLocked = !chapter.isFree && !purchase;
-  const completeOnEnd = !!purchase && !userProgress?.isCompleted;
+  const course = await db.course.findUnique({
+    where: {
+      id: params.courseId,
+    },
+    include: {
+      chapters: {
+        where: {
+          isPublished: true,
+        },
+        orderBy: {
+          position: "asc",
+        },
+      },
+    },
+  });
+
+  if (!course) {
+    return redirect("/");
+  }
+
+  const publishedChapters = course.chapters.filter(
+    (chapter) => chapter.isPublished
+  );
+
+  const nextChapter = publishedChapters.find(
+    (chapter) => chapter.position > (chapter?.position || 0)
+  );
+
+  const userProgress = await db.userProgress.findUnique({
+    where: {
+      userId_chapterId: {
+        userId,
+        chapterId: chapter.id,
+      },
+    },
+  });
+
+  const purchase = await db.purchase.findUnique({
+    where: {
+      userId_courseId: {
+        userId,
+        courseId: course.id,
+      },
+    },
+  });
+
+  const isLocked = !purchase && !chapter.isFree;
 
   return (
     <div className="h-full w-full md:container">
@@ -58,9 +104,9 @@ const page = async ({ params }: ChapterProps) => {
               url={chapter.videoUrl}
               isLocked={isLocked}
               nextChapterId={nextChapter?.id}
-              chapterId={params.chapterId}
-              completeOnEnd={completeOnEnd}
-              courseId={params.courseId}
+              chapterId={chapter.id}
+              courseId={course.id}
+              completeOnEnd={!!purchase && !userProgress?.isCompleted}
               chapterType={chapter.videoUrl ? "video" : "text"}
               textContent={chapter.textContent || undefined}
             />
@@ -71,16 +117,13 @@ const page = async ({ params }: ChapterProps) => {
             <h2 className="text-2xl font-semibold">{chapter.title}</h2>
             {purchase ? (
               <CourseProgressButton
-                chapterId={params.chapterId}
-                courseId={params.courseId}
+                chapterId={chapter.id}
+                courseId={course.id}
                 nextChapterId={nextChapter?.id}
                 isCompleted={!!userProgress?.isCompleted}
               />
             ) : (
-              <CourseEnrollButton
-                courseId={params.courseId}
-                price={course.price!}
-              />
+              <CourseEnrollButton courseId={course.id} price={course.price!} />
             )}
           </div>
           <Preview value={chapter.description!} />
@@ -99,4 +142,4 @@ const page = async ({ params }: ChapterProps) => {
   );
 };
 
-export default page;
+export default ChapterIdPage;

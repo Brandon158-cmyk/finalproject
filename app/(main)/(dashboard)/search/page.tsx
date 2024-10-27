@@ -1,11 +1,10 @@
 import { getCourses } from "@/actions/get-courses";
-import { auth, clerkClient } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import { db } from "@/lib/db";
-import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
 import Categories from "./_components/Categories";
 import SearchInput from "@/components/SearchInput";
-import { redirect } from "next/navigation";
 import CoursesList from "@/components/Course/CoursesList";
 import Banner from "./_components/Banner";
 
@@ -29,24 +28,23 @@ const Searchpage = async ({ searchParams }: SearchPageProps) => {
       name: "asc",
     },
   });
+
   const courses = await getCourses({
-    userId: userId,
+    userId,
     ...searchParams,
   });
 
   return (
     <>
-      <div className='px-6 pt-6 md:hidden md:mb-0'>
+      <div className="px-6 pt-6 md:hidden md:mb-0">
         <SearchInput />
       </div>
-      <div className='p-6 space-y-4 w-screen md:w-full'>
+      <div className="p-6 space-y-4 w-screen md:w-full">
         <Categories items={categories} />
       </div>
       <Banner />
-      <div className='w-full h-full mx-auto container'>
-        <Suspense fallback={<div>Loading...</div>}>
-          <CoursesList items={courses} />
-        </Suspense>
+      <div className="w-full h-full mx-auto container">
+        <CoursesList items={courses} />
       </div>
     </>
   );

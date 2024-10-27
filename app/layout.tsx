@@ -25,12 +25,12 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang='en'>
+      <html lang="en">
         <body className={roboto.className}>
           <ConfettiProvider />
           <ThemeProvider
-            attribute='class'
-            defaultTheme='root'
+            attribute="class"
+            defaultTheme="root"
             disableTransitionOnChange
           >
             {children}

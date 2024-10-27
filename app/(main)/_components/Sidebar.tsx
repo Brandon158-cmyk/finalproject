@@ -25,13 +25,13 @@ const Sidebar = () => {
       )}
     >
       {/* Toggle Button */}
-      <div className='flex p-4 justify-between items-center'>
+      <div className="flex p-4 justify-between items-center">
         {!isCollapsed && (
-          <h1 className='font-bold w-auto h-8 flex items-center justify-center gap-3'>
-            <div className='!h-8 p-1 !w-8 !aspect-square bg-[#2A2B2E] rounded-full text-md lg:text-lg flex items-center justify-center !text-white'>
+          <h1 className="font-bold w-auto h-8 flex items-center justify-center gap-3">
+            <div className="!h-8 p-1 !w-8 !aspect-square bg-[#2A2B2E] rounded-full text-md lg:text-lg flex items-center justify-center !text-white">
               P
             </div>
-            <div className='flex text-[#2A2B2E] text-md md:text-lg items-center gap-1'>
+            <div className="flex text-[#2A2B2E] text-md md:text-lg items-center gap-1">
               Punzila
             </div>
           </h1>
@@ -39,7 +39,7 @@ const Sidebar = () => {
         <Button
           variant={"default"}
           size={"icon"}
-          className='text-[#2A2B2E] hidden md:flex bg-transparent ml-auto hover:bg-[#FFEEEB] hover:text-[#2A2B2E] text-sm rounded-full'
+          className="text-[#2A2B2E] hidden md:flex bg-transparent ml-auto hover:bg-[#FFEEEB] hover:text-[#2A2B2E] text-sm rounded-full"
           onClick={toggleSidebar}
         >
           {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
@@ -50,7 +50,7 @@ const Sidebar = () => {
       <SidebarRoutes isCollapsed={isCollapsed} />
 
       {/* Settings Button */}
-      <div className='flex flex-col justify-center items-center mt-auto mb-2'>
+      <div className="flex flex-col justify-center items-center mt-auto mb-2">
         <Button
           asChild
           variant={"ghost"}
@@ -71,7 +71,7 @@ const Sidebar = () => {
                   : "bg-transparent text-neutral-400 group-hover:text-foreground"
               )}
             >
-              <Settings className='w-5 h-5' />
+              <Settings className="w-5 h-5" />
             </span>
             {!isCollapsed && "Settings"}
           </Link>
