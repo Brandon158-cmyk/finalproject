@@ -15,6 +15,8 @@ import { db } from "@/lib/db";
 import LeaderboardTable from "../_components/LeaderboardTable";
 import { IoMdTrophy } from "react-icons/io";
 import { BookOpen } from "lucide-react";
+import { calculateLevel } from "@/lib/xp-utils";
+import { avatarDecorations } from "@/config/avatar-decorations";
 
 async function Rankings() {
   const { userId } = auth();
@@ -37,7 +39,7 @@ async function Rankings() {
   );
 
   const leaderboardEntries = await Promise.all(
-    sortedUsers.map(async (user, index) => {
+    sortedUsers.map(async (user, position) => {
       const enrolledCourses = await db.purchase.count({
         where: { userId: user.id },
       });
@@ -49,13 +51,28 @@ async function Rankings() {
         },
       });
 
+      // Get user's decoration
+      const decoration = (user.publicMetadata.image as string) || "";
+      const [groupName, indexString] = decoration.split("-");
+      const index = Number(indexString);
+      const matchingDecoration = avatarDecorations.find(
+        (d) => d.title === groupName
+      );
+      const decorationUrl = matchingDecoration?.images[index] || "";
+
+      // Calculate user's level
+      const xp = (user.publicMetadata.xp as number) || 0;
+      const level = calculateLevel(xp);
+
       return {
-        position: index + 1,
+        position: position + 1,
         username: `${user.firstName} ${user.lastName}`,
         avatar: user.imageUrl,
+        decoration: decorationUrl,
+        level,
         enrolledCourses,
         completedCourses,
-        points: (user.publicMetadata.xp as number) || 0,
+        points: xp,
       };
     })
   );
@@ -71,42 +88,42 @@ async function Rankings() {
   });
 
   return (
-    <div className='mx-6 my-4 flex flex-col gap-4'>
+    <div className="mx-6 my-4 flex flex-col gap-4">
       <div>
-        <h2 className='text-2xl font-bold'>Leaderboard</h2>
+        <h2 className="text-2xl font-bold">Leaderboard</h2>
       </div>
-      <div className='flex justify-start items-center gap-4'>
-        <div className='flex justify-start bg-sky-700 rounded-[0.5rem] px-4 py-2'>
-          <div className='flex items-center space-x-4'>
+      <div className="flex justify-start items-center gap-4">
+        <div className="flex justify-start bg-sky-700 rounded-[0.5rem] px-4 py-2">
+          <div className="flex items-center space-x-4">
             <Image
               src={currentUserAvatar}
               alt={currentUserName}
               width={20}
               height={20}
-              className='rounded-full ring-2 ring-white'
+              className="rounded-full ring-2 ring-white"
             />
-            <span className='text-sm text-white'>{currentUserName}</span>
-            <span className='font-bold text-white'>{currentUserPosition}</span>
+            <span className="text-sm text-white">{currentUserName}</span>
+            <span className="font-bold text-white">{currentUserPosition}</span>
           </div>
         </div>
-        <div className='border border-gray-300 flex justify-start bg-pink-100 rounded-[0.5rem] px-4 py-2'>
-          <div className='flex items-center space-x-4'>
-            <span className='flex items-center gap-2'>
-              <IoMdTrophy className='w-4 h-4 text-yellow-600' />
+        <div className="border border-gray-300 flex justify-start bg-pink-100 rounded-[0.5rem] px-4 py-2">
+          <div className="flex items-center space-x-4">
+            <span className="flex items-center gap-2">
+              <IoMdTrophy className="w-4 h-4 text-yellow-600" />
               <span>
-                <span className='font-bold'>{currentUserXP}</span>{" "}
-                <span className='text-sm'>Points</span>
+                <span className="font-bold">{currentUserXP}</span>{" "}
+                <span className="text-sm">Points</span>
               </span>
             </span>
             <span>|</span>
-            <span className='flex items-center gap-2'>
-              <BookOpen className='w-4 h-4 text-green-600' />
+            <span className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-green-600" />
               <div>
-                <span className='font-bold'>
+                <span className="font-bold">
                   {" "}
                   {currentUserEnrolledCourses}{" "}
                 </span>
-                <span className='text-sm'>Enrolled Courses</span>
+                <span className="text-sm">Enrolled Courses</span>
               </div>
             </span>
           </div>

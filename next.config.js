@@ -3,28 +3,22 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
+        hostname: "archive.org",
+      },
+      {
         hostname: "img.clerk.com",
-        port: "",
-        pathname: "/*",
       },
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "/*",
+        hostname: "images.clerk.dev",
       },
       {
-        protocol: "https",
-        hostname: "unsplash.com",
-        port: "",
-        pathname: "/*",
+        hostname: "uploadthing.com",
       },
       {
-        protocol: "https",
-        hostname: "ui-avatars.com",
-        port: "",
-        pathname: "/*",
+        hostname: "utfs.io",
+      },
+      {
+        hostname: "external-content.duckduckgo.com",
       },
     ],
   },

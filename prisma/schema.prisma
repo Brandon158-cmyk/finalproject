@@ -21,6 +21,7 @@ model Course {
   categoryId String?
   category Category? @relation(fields: [categoryId], references: [id])
 
+  revenueShares RevenueShare[]
   chapters Chapter[]
   purchases Purchase[]
 
@@ -32,9 +33,10 @@ model Course {
 }
 
 model Category {
-  id String @id @default(uuid()) @map("_id") 
-  name String @unique
+  id      String    @id @default(uuid()) @map("_id")
+  name    String    @unique
   courses Course[]
+  quizzes Quiz[]
 }
 
 model Chapter {
@@ -96,4 +98,50 @@ model StripeCustomer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model RevenueShare {
+  id              String   @id @default(uuid()) @map("_id")
+  courseId        String
+  instructorId    String
+  purchaseAmount  Float
+  instructorRevenue Float
+  platformFee     Float
+  status          String   @default("PENDING")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  course          Course   @relation(fields: [courseId], references: [id])
+
+  @@index([instructorId])
+  @@index([courseId])
+}
+
+model QuizSession {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  categoryId  String
+  difficulty  String
+  score       Int
+  totalQuestions Int
+  completedAt DateTime?
+  createdAt   DateTime    @default(now())
+
+  @@index([userId])
+}
+
+model Quiz {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  categoryId  String
+  difficulty  String
+  score       Int
+  completed   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  category    Category    @relation(fields: [categoryId], references: [id])
+  
+  @@index([userId])
+  @@index([categoryId])
 }

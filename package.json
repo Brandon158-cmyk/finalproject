@@ -13,6 +13,7 @@
     "@bentogrid/core": "^1.1.1",
     "@clerk/nextjs": "^4.27.1",
     "@clerk/themes": "^1.7.9",
+    "@google/generative-ai": "^0.21.0",
     "@hello-pangea/dnd": "^16.3.0",
     "@hookform/resolvers": "^3.3.2",
     "@mui/system": "^5.14.18",
