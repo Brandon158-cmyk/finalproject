@@ -165,6 +165,7 @@ model StudyGroup {
   course          Course?   @relation(fields: [courseId], references: [id])
   category        Category? @relation(fields: [categoryId], references: [id])
   members         GroupMember[]
+  messages        GroupMessage[]
 
   @@index([courseId])
   @@index([categoryId])
@@ -181,5 +182,18 @@ model GroupMember {
   group       StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@unique([groupId, userId])
+  @@index([userId])
+}
+
+model GroupMessage {
+  id        String      @id @default(uuid()) @map("_id")
+  content   String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  userId    String
+  groupId   String
+  group     StudyGroup  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
   @@index([userId])
 }
