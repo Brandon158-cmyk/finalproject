@@ -5,6 +5,7 @@ import { calculateLevel } from "@/lib/xp-utils";
 import GroupHeader from "./_components/GroupHeader";
 import GroupMembers from "./_components/GroupMembers";
 import GroupDiscussion from "./_components/GroupDiscussion";
+import GroupResources from "./_components/GroupResources";
 
 interface GroupPageProps {
   params: {
@@ -36,6 +37,15 @@ const GroupPage = async ({ params }: GroupPageProps) => {
   if (!group) {
     return redirect("/groups");
   }
+
+  const resources = await db.groupResource.findMany({
+    where: {
+      groupId: params.groupId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   // Get member details
   const memberDetails = await Promise.all(
@@ -72,6 +82,12 @@ const GroupPage = async ({ params }: GroupPageProps) => {
             members={memberDetails}
             isAdmin={isAdmin}
             groupId={group.id}
+          />
+          <GroupResources
+            groupId={group.id}
+            isMember={isMember}
+            isAdmin={isAdmin}
+            resources={resources}
           />
         </div>
       </div>

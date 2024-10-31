@@ -166,6 +166,7 @@ model StudyGroup {
   category        Category? @relation(fields: [categoryId], references: [id])
   members         GroupMember[]
   messages        GroupMessage[]
+  resources       GroupResource[]
 
   @@index([courseId])
   @@index([categoryId])
@@ -193,6 +194,21 @@ model GroupMessage {
   userId    String
   groupId   String
   group     StudyGroup  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([userId])
+}
+
+model GroupResource {
+  id          String      @id @default(uuid()) @map("_id")
+  title       String
+  type        String      // "file" or "link"
+  url         String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  userId      String
+  groupId     String
+  group       StudyGroup  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@index([groupId])
   @@index([userId])

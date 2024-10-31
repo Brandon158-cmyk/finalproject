@@ -29,16 +29,24 @@ import { GroupPrivacy } from "@/lib/types/group";
 import Combobox from "@/components/ui/combox";
 import TagInput from "./TagInput";
 
-const formSchema = z.object({
-  name: z.string().min(3, "Name must be at least 3 characters"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  privacy: z.enum(["public", "private", "course-members"] as const),
-  courseId: z.string().optional(),
-  categoryId: z.string().optional(),
-  maxMembers: z.number().min(2).max(100),
-  levelRequirement: z.number().min(0),
-  tags: z.array(z.string()),
-});
+const formSchema = z
+  .object({
+    name: z.string().min(3, "Name must be at least 3 characters"),
+    description: z
+      .string()
+      .min(10, "Description must be at least 10 characters"),
+    privacy: z.enum(["public", "private", "course-members"] as const),
+    courseId: z.string().optional(),
+    categoryId: z.string().optional(),
+    maxMembers: z.number().min(2).max(100),
+    levelRequirement: z.number().min(0),
+    tags: z.array(z.string()),
+  })
+  //   TODO: Fix this after the group resources feature is implemented
+  .refine((data) => data.levelRequirement <= userLevel, {
+    message: "Level requirement cannot be higher than your current level",
+    path: ["levelRequirement"],
+  });
 
 interface CreateGroupFormProps {
   userLevel: number;
