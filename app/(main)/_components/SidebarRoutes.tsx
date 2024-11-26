@@ -1,12 +1,11 @@
 "use client";
 
-import { ArrowLeft, BarChart, Compass, List, Plus } from "lucide-react";
+import { ArrowLeft, BarChart, Compass, List, Plus, Group } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import { usePathname } from "next/navigation";
 import { MdOutlineLeaderboard } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { cn } from "@/lib/utils";
-import { BiShoppingBag } from "react-icons/bi";
 import { IconType } from "react-icons";
 import { LucideIcon } from "lucide-react";
 
@@ -26,10 +25,10 @@ const guestRoutes = [
     label: "Leaderboard",
     href: "/rankings",
   },
-  {
-    icon: BiShoppingBag,
-    label: "Shop",
-    href: "/shop",
+{
+    icon: Group,
+    label: "Groups",
+    href: "/groups",
   },
 ];
 const teacherRoutes = [
