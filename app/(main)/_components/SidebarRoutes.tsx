@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BarChart, Compass, List, Plus, Group } from "lucide-react";
+import { ArrowLeft, BarChart, Compass, List, Plus, Group, Pencil, } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 import { usePathname } from "next/navigation";
 import { MdOutlineLeaderboard } from "react-icons/md";
